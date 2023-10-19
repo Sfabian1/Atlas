@@ -1,0 +1,19 @@
+{
+  "name": "atlas",
+  "version": "0.0.1",
+  "description": "Atlas Shrugged API",
+  "main": "lib/index.js",
+  "scripts": { "test": 
+  "jasmine" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PietropaoloV/Atlas.git"
+  },
+  "author": "vapp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PietropaoloV/Atlas/issues"
+  },
+  "homepage": "https://github.com/PietropaoloV/Atlas#readme"
+}
