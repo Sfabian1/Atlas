@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "description": "Atlas Shrugged API",
   "main": "lib/index.js",
-  "scripts": { "test": 
-  "jasmine" 
+  "scripts": {
+    "test": "jasmine",
+    "install": "npm install fast-xml-parser && npm install mysql &&  npm install uuid",
+    "install-test-suite": "npm install --save-dev jasmine"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/PietropaoloV/Atlas/issues"
   },
-  "homepage": "https://github.com/PietropaoloV/Atlas#readme"
+  "homepage": "https://github.com/PietropaoloV/Atlas#readme",
+  "devDependencies": {
+    "jasmine": "^5.1.0"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.3.2",
+    "mysql": "^2.18.1",
+    "uuid": "^9.0.1"
+  }
 }
