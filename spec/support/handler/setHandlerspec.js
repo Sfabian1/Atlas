@@ -1,4 +1,4 @@
-const { SetHandler } = require('../../../lib/main/handlers/setHandler.js');
+const { SetHandler } = require('../../../lib/main/handlers/set-handler.js');
 
 describe("SetHandler", () => {
 

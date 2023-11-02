@@ -1,4 +1,4 @@
-const { WorkoutHandler } = require('../../../lib/main/handlers/workoutHandler.js');
+const { WorkoutHandler } = require('../../../lib/main/handlers/workout-handler.js');
 
 describe("WorkoutHandler", () => {
 
@@ -76,18 +76,6 @@ describe("WorkoutHandler", () => {
             expect(mockRes.data).toEqual({ error: "Internal Server Error" });
         });*/
     });
-
-    describe("CreateWorkout method", () => {
-        let mockReq, mockRes;
-
-        beforeEach(() => {
-            mockReq = {
-                params: {
-                    userID: "123"
-                },
-                body: {}
-            };
-
 
     describe("ListWorkouts method", () => {
         let mockReq, mockRes;
@@ -189,6 +177,16 @@ describe("WorkoutHandler", () => {
         });
     });
 
+    describe("CreateWorkout method", () => {
+        let mockReq, mockRes;
+
+        beforeEach(() => {
+            mockReq = {
+                params: {
+                    userID: "123"
+                },
+                body: {}
+            };
 
     
         it("should return 400 if userID is missing", () => {
