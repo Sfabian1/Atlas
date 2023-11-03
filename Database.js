@@ -65,17 +65,30 @@ const config = {
       },
     },
     {
+      /*
       name: 'workout',
       schema: (table) => {
-        table.string('workout_id').primary();
+        table.increments('workout_id').primary();
         table.string('name');
-        table.string('user_id').notNullable();
+        table.integer('user_id').notNullable();
         table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
         table.time('timeStart').notNullable();
         table.time('timeEnd').notNullable();
         table.date('date').notNullable();
         table.enu('status', ['IN_PROGRESS', 'COMPLETED', 'STARTED']);
       },
+      */
+      name: 'workout',
+      schema: (table) => {
+        table.string('workout_id', 255).primary();
+        table.string('name', 255);
+        table.integer('user_id');
+        table.string('difficulty', 255);
+        table.string('timeStart', 255);
+        table.string('timeEnd', 255);
+        table.string('date', 255);
+        table.string('status', 255);
+      }, 
     },
     {
       name: 'exercise',
