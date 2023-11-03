@@ -38,7 +38,7 @@ const config = {
       table.string('user_id').notNullable();
       table.string('name');
       table.string('target_muscle_group');
-      table.string('force', ['push', 'pull']);
+      table.string('forces', ['push', 'pull']);
       table.string('rest_interval');
       table.string('progression', ['weight', 'reps', 'time', 'distance']);
       table.string('link');
@@ -170,6 +170,7 @@ const config = {
         table.string('time_start');
         table.string('time_end');
     }
+  }
   ];
 
   // Function to create tables
