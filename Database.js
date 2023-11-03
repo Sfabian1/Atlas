@@ -93,7 +93,7 @@ const config = {
       }, 
     },
     {
-      name: 'exercise',
+      /*name: 'exercise',
       schema: (table) => {
         table.string('exercise_id').primary();
         table.string('user_id').notNullable();
@@ -120,10 +120,21 @@ const config = {
         table.time('rest_interval');
         table.enu('progression', ['weight', 'reps', 'time', 'distance']);
         table.string('link');
+      }, */
+       name: 'exercise',
+        schema: (table) => {
+          table.string('exerciseID').primary();
+          table.string('userID').notNullable();
+          table.string('name');
+          table.string('target_muscle_group');
+          table.string('Forces');
+          table.string('rest_interval');
+          table.string('progression');
+          table.string('link');
       },
     },
     {
-      name: 'sets',
+      /* name: 'sets',
       schema: (table) => {
         table.string('setID').primary();
         table.string('exerciseID').notNullable();
@@ -140,7 +151,24 @@ const config = {
         table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
         table.time('time_start');
         table.time('time_end');
-      },
+      }, */
+      name: 'sets',
+      schema: (table) => {
+        table.string('setID').primary();
+        table.string('exerciseID');
+        table.string('userID');
+        table.string('workoutID');
+        table.string('Date');
+        table.string('num_of_times');
+        table.string('weight');
+        table.string('weight_metric', ['lbs', 'kg', 'ton', 'tonne']);
+        table.string('distance');
+        table.string('distance_metric', ['feet', 'yards', 'miles', 'meters', 'kilometers']);
+        table.string('rep_time');
+        table.string('rest_period');
+        table.string('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
+        table.string('time_start');
+        table.string('time_end');
     }
   ];
 
