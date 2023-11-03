@@ -1,3 +1,5 @@
+const mysql = require("mysql");
+
 const config = {
   app: {
     port: 8000,
@@ -15,7 +17,7 @@ const config = {
 (async () => {
   console.log('Starting the async function');
   const knex = require('knex')({
-    client: 'mysql2',
+    client: 'mysql',
     connection: {
       host: config.db.host,
       user: config.db.user,
@@ -31,15 +33,15 @@ const config = {
       name: 'security',
       schema: (table) => {
         table.string('username').primary();
-        table.integer('user_id').notNullable();
+        table.string('user_id').notNullable();
         table.string('password').notNullable();
       },
     },
     {
       name: 'wellness',
       schema: (table) => {
-        table.increments('wellness_id').primary();
-        table.integer('user_id').notNullable();
+        table.string('wellness_id').primary();
+        table.string('user_id').notNullable();
         table.date('date').notNullable();
         table.enu('mood', ['worst', 'worse', 'normal', 'better', 'best']).notNullable();
         table.enu('stress', ['extreme', 'high', 'moderate', 'mild', 'relaxed']).notNullable();
@@ -52,8 +54,8 @@ const config = {
     {
       name: 'profile',
       schema: (table) => {
-        table.increments('profile_id').primary();
-        table.integer('user_id').notNullable();
+        table.string('profile_id').primary();
+        table.string('user_id').notNullable();
         table.string('username');
         table.timestamp('created_at');
         table.float('height').notNullable();
@@ -65,9 +67,9 @@ const config = {
     {
       name: 'workout',
       schema: (table) => {
-        table.increments('workout_id').primary();
+        table.string('workout_id').primary();
         table.string('name');
-        table.integer('user_id').notNullable();
+        table.string('user_id').notNullable();
         table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
         table.time('timeStart').notNullable();
         table.time('timeEnd').notNullable();
@@ -78,8 +80,8 @@ const config = {
     {
       name: 'exercise',
       schema: (table) => {
-        table.increments('exercise_id').primary();
-        table.integer('user_id').notNullable();
+        table.string('exercise_id').primary();
+        table.string('user_id').notNullable();
         table.string('name');
         table.enu('target_muscle_group', [
           'abdominals',
@@ -106,12 +108,12 @@ const config = {
       },
     },
     {
-      name: 'set',
+      name: 'sets',
       schema: (table) => {
-        table.increments('set_id').primary();
-        table.integer('exercise_id').notNullable();
-        table.integer('user_id').notNullable();
-        table.integer('workout_id').notNullable();
+        table.string('setID').primary();
+        table.string('exerciseID').notNullable();
+        table.string('userID').notNullable();
+        table.string('workoutID').notNullable();
         table.date('Date').notNullable();
         table.integer('num_of_times');
         table.integer('weight');
@@ -131,10 +133,14 @@ const config = {
   async function createTables() {
     for (const { name, schema } of tables) {
       // Comment out the creation code
-      // await knex.schema.createTable(name, schema);
+      try {
+      await knex.schema.createTable(name, schema);
+      } catch (error){
+        console.log(error);
+      }
 
       // Uncomment this line to delete the table before creating it
-      await knex.schema.dropTableIfExists(name);
+     //await knex.schema.dropTableIfExists(name);
 
       console.log(`Table ${name} created.`);
     }
@@ -161,9 +167,9 @@ const config = {
   try {
     // Create tables
     await createTables();
-
+   
     // Delete tables (if needed)
-    await deleteTables();
+    //await deleteTables();
 
     // Generate database documentation
     generateDocumentation();
