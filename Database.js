@@ -200,28 +200,36 @@ const config = {
 
   async function addDefaultExercises() {
     try {
-        var userID = "0000000000000000000000";
-        const connectionDB = await db.connection;
-    
-        const ExerciseD = genUUID.generateShortUUID();
-        var query = "INSERT INTO defaultexercise VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        await connectionDB.query(query,[ExerciseD, userID, 'Push-up', 'chest', 'push', '1', 'reps', 'https://www.youtube.com/watch?v=IODxDxX7oi4']);
-    
-        const ExerciseA = genUUID.generateShortUUID();
-        var query = "INSERT INTO defaultexercise VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        await connectionDB.query(query,[ExerciseA, userID, 'Sit-up', 'abdominals', 'push', '1', 'reps', 'https://www.youtube.com/watch?v=1fbU_MkV7NE']);
-    
-        const ExerciseB = genUUID.generateShortUUID();
-        var query = "INSERT INTO defaultexercise VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        await connectionDB.query(query,[ExerciseB, userID, 'Plank', 'abdominals', 'push', '1', 'reps', 'https://www.youtube.com/watch?v=yeKv5oX_6GY']);
-    
-        const ExerciseC = genUUID.generateShortUUID();
-        var query = "INSERT INTO defaultexercise VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        await connectionDB.query(query, [ExerciseC, userID, 'Squats', 'glutes', 'push', '1', 'reps', 'https://www.youtube.com/watch?v=IB_icWRzi4E']);
-      } catch (error) {
-        console.error(error);
+      const userID = "0000000000000000000000"; // Replace with your actual userID if necessary
+  
+      // Array of default exercises to be inserted
+      const defaultExercises = [
+        { name: 'Push-up', target_muscle_group: 'chest', force: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=IODxDxX7oi4' },
+        { name: 'Sit-up', target_muscle_group: 'abdominals', force: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=1fbU_MkV7NE' },
+        { name: 'Plank', target_muscle_group: 'abdominals', force: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=yeKv5oX_6GY' },
+        { name: 'Squats', target_muscle_group: 'glutes', force: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=IB_icWRzi4E' },
+      ];
+  
+      // Insert default exercises into the database
+      for (const exercise of defaultExercises) {
+        const exerciseID = knex.raw("REPLACE(UUID(),'-','')"); // Generating UUID for each exercise
+        await knex('defaultexercise').insert({
+          exercise_id: exerciseID,
+          user_id: userID,
+          name: exercise.name,
+          target_muscle_group: exercise.target_muscle_group,
+          forces: exercise.force,
+          rest_interval: exercise.rest_interval,
+          progression: exercise.progression,
+          link: exercise.link
+        });
       }
-     }
+  
+      console.log('Default exercises added successfully.');
+    } catch (error) {
+      console.error('Error adding default exercises:', error);
+    }
+  }
     
 
   // Function to generate database documentation
