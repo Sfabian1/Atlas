@@ -1,4 +1,6 @@
 const mysql = require("mysql");
+const db = require("./lib/main/util/sqlconnector.js");
+const genUUID = require("./lib/main/util/util.js");
 
 const config = {
   app: {
@@ -6,11 +8,11 @@ const config = {
     host: 'localhost'
   },
   db: {
-    host: "mysql-3d532cd0-testvapp.a.aivencloud.com", // Replace with your remote database host
+    host: "mysql-757580f-scarletmail-41ca.a.aivencloud.com", // Replace with your remote database host
     user: "avnadmin", // Replace with your database username
-    password: "AVNS_rpXTNpZ2xrc8dNe-ih6", // Replace with your database password
+    password: "AVNS_WoKhjweGPR4478K1pNo", // Replace with your database password
     database: "defaultdb", // Replace with your database name
-    port: "20550" // Replace with your database port
+    port: "19157" // Replace with your database port
   }
 };
 
@@ -29,6 +31,19 @@ const config = {
 
   // Define the table schemas
   const tables = [
+    {
+      name: 'defaultexercise',
+      schema: (table) => {
+      table.string('exercise_id').primary();
+      table.string('user_id').notNullable();
+      table.string('name');
+      table.string('target_muscle_group');
+      table.string('force', ['push', 'pull']);
+      table.string('rest_interval');
+      table.string('progression', ['weight', 'reps', 'time', 'distance']);
+      table.string('link');
+      }
+    },
     {
       name: 'security',
       schema: (table) => {
@@ -65,19 +80,6 @@ const config = {
       },
     },
     {
-      /*
-      name: 'workout',
-      schema: (table) => {
-        table.increments('workout_id').primary();
-        table.string('name');
-        table.integer('user_id').notNullable();
-        table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
-        table.time('timeStart').notNullable();
-        table.time('timeEnd').notNullable();
-        table.date('date').notNullable();
-        table.enu('status', ['IN_PROGRESS', 'COMPLETED', 'STARTED']);
-      },
-      */
       name: 'workout',
       schema: (table) => {
         table.string('workout_id', 255).primary();
@@ -167,6 +169,32 @@ const config = {
     }
   }
 
+  async function addDefaultExercises() {
+    try {
+        var userID = "0000000000000000000000";
+        const connectionDB = await db.connection;
+    
+        const ExerciseD = genUUID.generateShortUUID();
+        var query = "INSERT INTO defaultexercise VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        await connectionDB.query(query,[ExerciseD, userID, 'Push-up', 'chest', 'push', '1', 'reps', 'https://www.youtube.com/watch?v=IODxDxX7oi4']);
+    
+        const ExerciseA = genUUID.generateShortUUID();
+        var query = "INSERT INTO defaultexercise VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        await connectionDB.query(query,[ExerciseA, userID, 'Sit-up', 'abdominals', 'push', '1', 'reps', 'https://www.youtube.com/watch?v=1fbU_MkV7NE']);
+    
+        const ExerciseB = genUUID.generateShortUUID();
+        var query = "INSERT INTO defaultexercise VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        await connectionDB.query(query,[ExerciseB, userID, 'Plank', 'abdominals', 'push', '1', 'reps', 'https://www.youtube.com/watch?v=yeKv5oX_6GY']);
+    
+        const ExerciseC = genUUID.generateShortUUID();
+        var query = "INSERT INTO defaultexercise VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        await connectionDB.query(query, [ExerciseC, userID, 'Squats', 'glutes', 'push', '1', 'reps', 'https://www.youtube.com/watch?v=IB_icWRzi4E']);
+      } catch (error) {
+        console.error(error);
+      }
+     }
+    
+
   // Function to generate database documentation
   function generateDocumentation() {
     const documentation = tables.map(({ name, schema }) => {
@@ -180,7 +208,7 @@ const config = {
   try {
     // Create tables
     await createTables();
-   
+    await addDefaultExercises();
     // Delete tables (if needed)
     //await deleteTables();
 
