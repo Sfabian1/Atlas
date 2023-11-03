@@ -1,40 +1,41 @@
 const config = {
   app: {
-      port: 8000,
-      host: 'localhost'
+    port: 8000,
+    host: 'localhost'
   },
   db: {
-      host: "mysql-3d532cd0-testvapp.a.aivencloud.com", // Replace with your remote database host
-      user: "avnadmin", // Replace with your database username
-      password: "AVNS_rpXTNpZ2xrc8dNe-ih6", // Replace with your database password
-      database: "defaultdb", // Replace with your database name
-      port: "20550" // Replace with your database port
+    host: "mysql-3d532cd0-testvapp.a.aivencloud.com", // Replace with your remote database host
+    user: "avnadmin", // Replace with your database username
+    password: "AVNS_rpXTNpZ2xrc8dNe-ih6", // Replace with your database password
+    database: "defaultdb", // Replace with your database name
+    port: "20550" // Replace with your database port
   }
-}
+};
 
 (async () => {
-const knex = require('knex')({
-  client: 'mysql2',
-  connection: {
-    host: config.db.host,
-    user: config.db.user,
-    password: config.db.password,
-    database: config.db.database,
-    port: config.db.port
-  },
-});
-
-// Define the table schemas
-const tables = [
-  {
-    name: 'security',
-    schema: (table) => {
-      table.string('username').primary();
-      table.integer('user_id').notNullable();
-      table.string('password').notNullable();
+  console.log('Starting the async function');
+  const knex = require('knex')({
+    client: 'mysql2',
+    connection: {
+      host: config.db.host,
+      user: config.db.user,
+      password: config.db.password,
+      database: config.db.database,
+      port: config.db.port
     },
-  },
-  {
+  });
+
+  // Define the table schemas
+  const tables = [
+    {
+      name: 'security',
+      schema: (table) => {
+        table.string('username').primary();
+        table.integer('user_id').notNullable();
+        table.string('password').notNullable();
+      },
+    },
+    {
       name: 'wellness',
       schema: (table) => {
         table.increments('wellness_id').primary();
@@ -48,8 +49,6 @@ const tables = [
         table.enu('soreness', ['severe', 'strong', 'moderate', 'mild', 'none']).notNullable();
       },
     },
-    
-
     {
       name: 'profile',
       schema: (table) => {
@@ -63,7 +62,6 @@ const tables = [
         table.integer('age').notNullable();
       },
     },
-    
     {
       name: 'workout',
       schema: (table) => {
@@ -77,7 +75,6 @@ const tables = [
         table.enu('status', ['IN_PROGRESS', 'COMPLETED', 'STARTED']);
       },
     },
-    
     {
       name: 'exercise',
       schema: (table) => {
@@ -107,10 +104,8 @@ const tables = [
         table.enu('progression', ['weight', 'reps', 'time', 'distance']);
         table.string('link');
       },
-    }
-    
-
-      {
+    },
+    {
       name: 'set',
       schema: (table) => {
         table.increments('set_id').primary();
@@ -130,51 +125,54 @@ const tables = [
         table.time('time_end');
       },
     }
-    
-];
+  ];
 
+  // Function to create tables
+  async function createTables() {
+    for (const { name, schema } of tables) {
+      // Comment out the creation code
+      // await knex.schema.createTable(name, schema);
 
-// Function to create tables
-async function createTables() {
-  for (const { name, schema } of tables) {
-    await knex.schema.createTable(name, schema);
-    console.log(`Table ${name} created.`);
+      // Uncomment this line to delete the table before creating it
+      await knex.schema.dropTableIfExists(name);
+
+      console.log(`Table ${name} created.`);
+    }
   }
-}
 
-// Function to delete tables (if needed)
-async function deleteTables() {
-  for (const { name } of tables) {
-    await knex.schema.dropTableIfExists(name);
-    console.log(`Table ${name} deleted.`);
+  // Function to delete tables (if needed)
+  async function deleteTables() {
+    for (const { name } of tables) {
+      await knex.schema.dropTableIfExists(name);
+      console.log(`Table ${name} deleted.`);
+    }
   }
-}
 
-// Function to generate database documentation
-function generateDocumentation() {
-  const documentation = tables.map(({ name, schema }) => {
-    const tableSchema = knex.schema.createTable(name, schema).toString();
-    return `**Table: ${name}**\n\n${tableSchema}`;
-  }).join('\n\n');
+  // Function to generate database documentation
+  function generateDocumentation() {
+    const documentation = tables.map(({ name, schema }) => {
+      const tableSchema = knex.schema.createTable(name, schema).toString();
+      return `**Table: ${name}**\n\n${tableSchema}`;
+    }).join('\n\n');
 
-  console.log(documentation);
-}
+    console.log(documentation);
+  }
 
-try {
-  // Create tables
-  await createTables();
+  try {
+    // Create tables
+    await createTables();
 
-  // Delete tables (if needed)
-  // await deleteTables();
+    // Delete tables (if needed)
+    await deleteTables();
 
-  // Generate database documentation
-  generateDocumentation();
-} catch (error) {
-  console.error("Error:", error);
-} finally {
-  // Close the database connection
-  knex.destroy();
-}
+    // Generate database documentation
+    generateDocumentation();
+  } catch (error) {
+    console.error("Error:", error);
+  } finally {
+    // Close the database connection
+    knex.destroy();
+  }
+
+  console.log('Exiting the async function');
 })();
-
-
