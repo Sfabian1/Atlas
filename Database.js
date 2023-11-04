@@ -8,11 +8,11 @@ const config = {
     host: 'localhost'
   },
   db: {
-    host: "mysql-757580f-scarletmail-41ca.a.aivencloud.com", // Replace with your remote database host
-    user: "avnadmin", // Replace with your database username
-    password: "AVNS_WoKhjweGPR4478K1pNo", // Replace with your database password
-    database: "defaultdb", // Replace with your database name
-    port: "19157" // Replace with your database port
+    host:"mysql-b1360a5-sam2001fabian-79c2.a.aivencloud.com",
+    user:"avnadmin",
+    password:"AVNS_q-_1nPk2Wfg88rY72Nr",
+    port:"10623",
+    database:"defaultdb"
   }
 };
 
