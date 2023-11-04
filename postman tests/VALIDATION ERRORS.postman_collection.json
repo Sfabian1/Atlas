@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "07eab387-047d-4013-8f02-9a675e8cd9b5",
+		"name": "VALIDATION ERRORS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30659452"
+	},
+	"item": [
+		{
+			"name": "invalid category field CREATE WORKOUT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"name\" : \"Benching bruh\",\n \"difficulty\" :\"lightwork\",\n \"timeStart\": \"09:20:2021\",\n \"timeEnd\": \"09:24:2021\",\n \"date\": \"09-14-2024\",\n \"status\": \"COMPLETED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/workouts"
+			},
+			"response": []
+		},
+		{
+			"name": "invalid CREATE PROFILE Body",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"username\": \"whoareyoubrev\",\n \"created_at\": \"09-20-2020\",\n \"height\": \"140\",\n \"weight\": \"233\",\n \"bmi\": \"22\",\n \"age\": \"23\"   \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "update exercise with no exercise id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"forces\": \"push\",\n\"target_musclegroup\": \"chest\",\n\"rest_interval\" : \"200\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/"
+			},
+			"response": []
+		},
+		{
+			"name": "invalid CREATE WORKOUT BODY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"name\" : \"Benching bruh\",\n \"difficulty\" :\"hard\",\n \n \"timeEnd\": \"09:24:2021\",\n \"date\": \"09-14-2024\",\n \"status\": \"COMPLETED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/workouts"
+			},
+			"response": []
+		},
+		{
+			"name": "invalid CREATE EXERCISE BODY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\" :\"Samuel\",\n\"forces\":\"pull\", \n\"progression\": \"weight\" ,\n\"rest_interval\" : \"180\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/exercise"
+			},
+			"response": []
+		},
+		{
+			"name": "invalid CREATE WELLNESS BOdy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"date\": \"09-20-2001\",\n \"mood\" : \"worst\",\n \"stress\":\"extreme\",\n  \"sleep\": \"terrible\",\n  \n  \"soreness\":\"severe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/wellness"
+			},
+			"response": []
+		},
+		{
+			"name": "invalid category field CREATe xercise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\" :\"Samuel\",\n\"forces\":\"pull\",\n\"target_muscle_group\": \"eyes\",\n\"progression\": \"weight\" ,\n\"rest_interval\" : \"180\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/exercise"
+			},
+			"response": []
+		},
+		{
+			"name": "invalid User ID for GET WORKOUT",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/1029/workouts"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "userID",
+			"value": "1"
+		}
+	]
+}
