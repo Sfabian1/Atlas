@@ -38,9 +38,9 @@ const config = {
       table.string('user_id').notNullable();
       table.string('name');
       table.string('target_muscle_group');
-      table.string('forces', ['push', 'pull']);
+      table.string('forces');
       table.string('rest_interval');
-      table.string('progression', ['weight', 'reps', 'time', 'distance']);
+      table.string('progression');
       table.string('link');
       }
     },
@@ -204,10 +204,10 @@ const config = {
   
       // Array of default exercises to be inserted
       const defaultExercises = [
-        { name: 'Push-up', target_muscle_group: 'chest', force: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=IODxDxX7oi4' },
-        { name: 'Sit-up', target_muscle_group: 'abdominals', force: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=1fbU_MkV7NE' },
-        { name: 'Plank', target_muscle_group: 'abdominals', force: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=yeKv5oX_6GY' },
-        { name: 'Squats', target_muscle_group: 'glutes', force: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=IB_icWRzi4E' },
+        { name: 'Push-up', target_muscle_group: 'chest', forces: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=IODxDxX7oi4' },
+        { name: 'Sit-up', target_muscle_group: 'abdominals', forces: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=1fbU_MkV7NE' },
+        { name: 'Plank', target_muscle_group: 'abdominals', forces: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=yeKv5oX_6GY' },
+        { name: 'Squats', target_muscle_group: 'glutes', forces: 'push', rest_interval: '1', progression: 'reps', link: 'https://www.youtube.com/watch?v=IB_icWRzi4E' },
       ];
   
       // Insert default exercises into the database
@@ -218,7 +218,7 @@ const config = {
           user_id: userID,
           name: exercise.name,
           target_muscle_group: exercise.target_muscle_group,
-          forces: exercise.force,
+          forces: exercise.forces,
           rest_interval: exercise.rest_interval,
           progression: exercise.progression,
           link: exercise.link
