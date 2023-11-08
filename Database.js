@@ -82,14 +82,14 @@ const config = {
     {
       name: 'workout',
       schema: (table) => {
-        table.string('workout_id', 255).primary();
+        table.string('workoutID', 255).primary();
         table.string('name', 255);
-        table.integer('user_id');
-        table.string('difficulty', 255);
-        table.string('timeStart', 255);
-        table.string('timeEnd', 255);
-        table.string('date', 255);
-        table.string('status', 255);
+        table.integer('userID').notNullable();
+        table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
+        table.time('timeStart');
+        table.time('timeEnd');
+        table.date('date');
+        table.enu('status', ['IN_PROGRESS', 'COMPLETED', 'STARTED']);
       }, 
     },
     {
@@ -134,11 +134,11 @@ const config = {
       },
     },
     {
-      /* name: 'sets',
+      name: 'sets',
       schema: (table) => {
         table.string('setID').primary();
         table.string('exerciseID').notNullable();
-        table.string('userID').notNullable();
+        table.integer('userID').notNullable();
         table.string('workoutID').notNullable();
         table.date('Date').notNullable();
         table.integer('num_of_times');
@@ -151,25 +151,7 @@ const config = {
         table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
         table.time('time_start');
         table.time('time_end');
-      }, */
-      name: 'sets',
-      schema: (table) => {
-        table.string('setID').primary();
-        table.string('exerciseID');
-        table.string('userID');
-        table.string('workoutID');
-        table.string('Date');
-        table.string('num_of_times');
-        table.string('weight');
-        table.string('weight_metric', ['lbs', 'kg', 'ton', 'tonne']);
-        table.string('distance');
-        table.string('distance_metric', ['feet', 'yards', 'miles', 'meters', 'kilometers']);
-        table.string('rep_time');
-        table.string('rest_period');
-        table.string('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
-        table.string('time_start');
-        table.string('time_end');
-    }
+      }, 
   }
   ];
 
