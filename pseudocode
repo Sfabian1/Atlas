@@ -1,0 +1,464 @@
+# API Operation Pseudocode
+
+# Function to create tables in the database
+function createTables():
+    for each table in tables:
+        try:
+            # Access Operation: Write (createTable)
+            knex.schema.createTable(table.name, table.schema)
+        catch error:
+            # Handle error
+
+# Function to delete tables in the database (if needed)
+function deleteTables():
+    for each table in tables:
+        # Access Operation: Write (dropTableIfExists)
+        knex.schema.dropTableIfExists(table.name)
+
+# Default Exercises Operation Pseudocode
+
+# Function to add default exercises to the "defaultexercise" collection
+function populateDefaultExercises():
+    try:
+        const userID = "123";  # Simulating user ID for the default exercises
+        const exerciseHandler = new ExerciseHandler();  # creates instance of ExerciseHandler.
+
+        # mock default exercises
+        const defaultExercises = [
+            { exercise_id: 1, user_id: userID, name: 'Leg Extension', target_muscle_group: 'quadriceps', force: 'push', rest_interval: 120 ,progression:'weight',link: 'https://example.com/exercise1'},
+            { exercise_id: 2, user_id: userID, name: 'Calf Raise', target_muscle_group: 'calves', force: 'push', rest_interval: 120 ,progression: 'weight',link: 'https://example.com/exercise2' },
+            { exercise_id: 3, user_id: userID, name: 'Lat Pulldown', target_muscle_group: 'lats', force: 'pull', rest_interval: 120 ,progression: 'weight',link: 'https://example.com/exercise3' }
+        ];
+
+        for each exerciseData in defaultExercises:
+            exerciseHandler.CreateExercise(exerciseData);  # Simulate the creation of default exercises
+
+    catch error:
+        # Handle error
+
+# Function to list default exercises from the "defaultexercise" collection
+function listDefaultExercises():
+    try:
+        const userID = "123";  # Simulating user ID for listing exercises
+        const exerciseHandler = new ExerciseHandler();  # creates instance of ExerciseHandler.
+
+        const listReq = { url: userID };
+        const listResult = exerciseHandler.ListExercises(listReq);  # Simulate listing default exercises
+        print(listResult);
+
+    catch error:
+        # Handle error
+
+# Main function for default exercises
+function defaultExercisesMain():
+    try:
+        # Example: Populate default exercises
+        populateDefaultExercises()
+
+        # Example: List default exercises
+        listDefaultExercises()
+
+    catch error:
+        print("Error:", error)
+
+# Execute the main function for default exercises
+defaultExercisesMain()
+
+
+# Profile Operation Pseudocode
+
+# Function to create a new profile
+function createProfile(userID, profileData):
+    try:
+        # Access Operation: Write (CreateProfile)
+        const profileHandler = new ProfileHandler();
+        const result = profileHandler.CreateProfile(userID, profileData);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to get a profile
+function getProfile(userID, profileID):
+    try:
+        # Access Operation: Read (GetProfile)
+        const profileHandler = new ProfileHandler();
+        const result = profileHandler.GetProfile(userID, profileID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to list profiles
+function listProfiles(userID):
+    try:
+        # Access Operation: Read (ListProfiles)
+        const profileHandler = new ProfileHandler();
+        const result = profileHandler.ListProfiles(userID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to update a profile
+function updateProfile(userID, profileID, updates):
+    try:
+        # Access Operation: Write (UpdateProfile)
+        const profileHandler = new ProfileHandler();
+        const result = profileHandler.UpdateProfile(userID, profileID, updates);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to delete a profile
+function deleteProfile(userID, profileID):
+    try:
+        # Access Operation: Write (DeleteProfile)
+        const profileHandler = new ProfileHandler();
+        const result = profileHandler.DeleteProfile(userID, profileID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Main function for profiles
+function profilesMain():
+    try:
+        # Example: Create a profile
+        createProfile("123", { username: "JohnDoe", created_at: "2023-01-01", height: 180, weight: 75, bmi: 23, age: 30 });
+
+        # Example: Get a profile
+        getProfile("123", "profileID");
+
+        # Example: List profiles
+        listProfiles("123");
+
+        # Example: Update a profile
+        updateProfile("123", "profileID", { username: "UpdatedUsername" });
+
+        # Example: Delete a profile
+        deleteProfile("123", "profileID");
+
+    catch error:
+        print("Error:", error)
+
+# Execute the main function for profiles
+profilesMain()
+
+
+# Exercise Operation in Pseudocode
+# Function to create a new exercise
+function createExercise(userID, exerciseData):
+    try:
+        # Access Operation: Write (CreateExercise)
+        const exerciseHandler = new ExerciseHandler();
+        const result = exerciseHandler.CreateExercise(userID, exerciseData);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to get an exercise
+function getExercise(userID, exerciseID):
+    try:
+        # Access Operation: Read (GetExercise)
+        const exerciseHandler = new ExerciseHandler();
+        const result = exerciseHandler.GetExercise(userID, exerciseID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to list exercises
+function listExercises(userID):
+    try:
+        # Access Operation: Read (ListExercises)
+        const exerciseHandler = new ExerciseHandler();
+        const result = exerciseHandler.ListExercises(userID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to update an exercise
+function updateExercise(userID, exerciseID, updates):
+    try:
+        # Access Operation: Write (UpdateExercise)
+        const exerciseHandler = new ExerciseHandler();
+        const result = exerciseHandler.UpdateExercise(userID, exerciseID, updates);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to delete an exercise
+function deleteExercise(userID, exerciseID):
+    try:
+        # Access Operation: Write (DeleteExercise)
+        const exerciseHandler = new ExerciseHandler();
+        const result = exerciseHandler.DeleteExercise(userID, exerciseID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Main function for exercises
+function exercisesMain():
+    try:
+        # Example: Create an exercise
+        createExercise("123", { name: "Squats", target_muscle_group: "Legs", forces: "Push", rest_interval: "120", progression: "Weight", link: "https://example.com/squats" });
+
+        # Example: Get an exercise
+        getExercise("123", "exerciseID");
+
+        # Example: List exercises
+        listExercises("123");
+
+        # Example: Update an exercise
+        updateExercise("123", "exerciseID", { name: "Updated Squats" });
+
+        # Example: Delete an exercise
+        deleteExercise("123", "exerciseID");
+
+    catch error:
+        print("Error:", error)
+
+# Execute the main function for exercises
+exercisesMain()
+
+# Set Operation Pseudocode
+
+# Function to create a new set
+function createSet(userID, setBody):
+    try:
+        # Access Operation: Write (CreateSet)
+        const setHandler = new SetHandler();
+        const result = setHandler.CreateSet(userID, setBody);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to get a set
+function getSet(userID, setID):
+    try:
+        # Access Operation: Read (GetSet)
+        const setHandler = new SetHandler();
+        const result = setHandler.GetSet(userID, setID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to list sets
+function listSets(userID):
+    try:
+        # Access Operation: Read (ListSets)
+        const setHandler = new SetHandler();
+        const result = setHandler.ListSets(userID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to update a set
+function updateSet(userID, setID, updates):
+    try:
+        # Access Operation: Write (UpdateSet)
+        const setHandler = new SetHandler();
+        const result = setHandler.UpdateSet(userID, setID, updates);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to delete a set
+function deleteSet(userID, setID):
+    try:
+        # Access Operation: Write (DeleteSet)
+        const setHandler = new SetHandler();
+        const result = setHandler.DeleteSet(userID, setID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to process the body and create a set
+function processBodyCreateSet(req):
+    try:
+        # Access Operation: Write (CreateSet)
+        await req.on('data', chunk => {
+            super.accumulateChunkData(chunk);
+        });
+
+        await req.on('end', () => {});
+
+        const setHandler = new SetHandler();
+        const result = setHandler.CreateSet(req);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to process the body and update a set
+function processBodyUpdateSet(req):
+    try:
+        # Access Operation: Write (UpdateSet)
+        await req.on('data', chunk => {
+            super.accumulateChunkData(chunk);
+        });
+
+        await req.on('end', () => {});
+
+        const setHandler = new SetHandler();
+        const result = setHandler.UpdateSet(req);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Main function for sets
+function setsMain():
+    try:
+        # Example: Create a set
+        createSet("123", { exerciseID: "exerciseID123", workoutID: "workoutID456", Date: "2023-01-01", difficulty: "Easy", time_start: "12:00" });
+
+        # Example: Get a set
+        getSet("123", "setID789");
+
+        # Example: List sets
+        listSets("123");
+
+        # Example: Update a set
+        updateSet("123", "setID789", { difficulty: "Medium" });
+
+        # Example: Delete a set
+        deleteSet("123", "setID789");
+
+    catch error:
+        print("Error:", error)
+
+# Execute the main function for sets
+setsMain()
+
+
+
+
+# Workout Operation Pseudocode
+
+# Function to create a new workout
+function createWorkout(userID, workoutBody):
+    try:
+        # Access Operation: Write (CreateWorkout)
+        const workoutHandler = new WorkoutHandler();
+        const result = workoutHandler.CreateWorkout(userID, workoutBody);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to get a workout
+function getWorkout(userID, workoutID):
+    try:
+        # Access Operation: Read (GetWorkout)
+        const workoutHandler = new WorkoutHandler();
+        const result = workoutHandler.GetWorkout(userID, workoutID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to list workouts
+function listWorkouts(userID):
+    try:
+        # Access Operation: Read (ListWorkout)
+        const workoutHandler = new WorkoutHandler();
+        const result = workoutHandler.ListWorkout(userID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to update a workout
+function updateWorkout(userID, workoutID, updates):
+    try:
+        # Access Operation: Write (UpdateWorkout)
+        const workoutHandler = new WorkoutHandler();
+        const result = workoutHandler.UpdateWorkout(userID, workoutID, updates);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to delete a workout
+function deleteWorkout(userID, workoutID):
+    try:
+        # Access Operation: Write (DeleteWorkout)
+        const workoutHandler = new WorkoutHandler();
+        const result = workoutHandler.DeleteWorkout(userID, workoutID);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to process the body and create a workout
+function processBodyCreateWorkout(req):
+    try:
+        # Access Operation: Write (CreateWorkout)
+        await req.on('data', chunk => {
+            super.accumulateChunkData(chunk);
+        });
+
+        await req.on('end', () => {});
+
+        const workoutHandler = new WorkoutHandler();
+        const result = workoutHandler.CreateWorkout(req);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Function to process the body and update a workout
+function processBodyUpdateWorkout(req):
+    try:
+        # Access Operation: Write (UpdateWorkout)
+        await req.on('data', chunk => {
+            super.accumulateChunkData(chunk);
+        });
+
+        await req.on('end', () => {});
+
+        const workoutHandler = new WorkoutHandler();
+        const result = workoutHandler.UpdateWorkout(req);
+        print(result);
+
+    catch error:
+        # Handle error
+
+# Main function for workouts
+function workoutsMain():
+    try:
+        # Example: Create a workout
+        createWorkout("123", { name: "Workout123", difficulty: "Medium", date: "2023-01-01", status: "Active", timeStart: "12:00", timeEnd: "13:00" });
+
+        # Example: Get a workout
+        getWorkout("123", "workoutID789");
+
+        # Example: List workouts
+        listWorkouts("123");
+
+        # Example: Update a workout
+        updateWorkout("123", "workoutID789", { difficulty: "Hard" });
+
+        # Example: Delete a workout
+        deleteWorkout("123", "workoutID789");
+
+    catch error:
+        print("Error:", error)
+
+# Execute the main function for workouts
+workoutsMain()
+
+
+
