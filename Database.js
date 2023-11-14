@@ -28,7 +28,7 @@ const config = {
       port: config.db.port
     },
   });
-
+  
   // Define the table schemas
   const tables = [
     {
@@ -82,9 +82,9 @@ const config = {
     {
       name: 'workout',
       schema: (table) => {
-        table.string('workoutID', 255).primary();
+        table.bigInteger('workoutID').primary();
         table.string('name', 255);
-        table.integer('userID').notNullable();
+        table.bigInteger('userID').notNullable();
         table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
         table.time('timeStart');
         table.time('timeEnd');
@@ -93,10 +93,10 @@ const config = {
       }, 
     },
     {
-      /*name: 'exercise',
+      name: 'exercise',
       schema: (table) => {
-        table.string('exercise_id').primary();
-        table.string('user_id').notNullable();
+        table.bigInteger('exerciseID').primary();
+        table.bigInteger('userID').notNullable();
         table.string('name');
         table.enu('target_muscle_group', [
           'abdominals',
@@ -116,29 +116,18 @@ const config = {
           'shoulders',
           'triceps'
         ]);
-        table.enu('force', ['push', 'pull']);
+        table.enu('forces', ['push', 'pull']);
         table.time('rest_interval');
         table.enu('progression', ['weight', 'reps', 'time', 'distance']);
         table.string('link');
-      }, */
-       name: 'exercise',
-        schema: (table) => {
-          table.string('exerciseID').primary();
-          table.string('userID').notNullable();
-          table.string('name');
-          table.string('target_muscle_group');
-          table.string('Forces');
-          table.string('rest_interval');
-          table.string('progression');
-          table.string('link');
-      },
+      }, 
     },
     {
       name: 'sets',
       schema: (table) => {
-        table.string('setID').primary();
-        table.string('exerciseID').notNullable();
-        table.integer('userID').notNullable();
+        table.bigInteger('setID').primary();
+        table.string('exerciseID', 255).notNullable();
+        table.bigInteger('userID').notNullable();
         table.string('workoutID').notNullable();
         table.date('Date').notNullable();
         table.integer('num_of_times');
@@ -166,7 +155,7 @@ const config = {
       }
 
       // Uncomment this line to delete the table before creating it
-     //await knex.schema.dropTableIfExists(name);
+     //await knex.schema.dropTableIfExists(defaultexercise);
 
       console.log(`Table ${name} created.`);
     }
@@ -229,7 +218,7 @@ const config = {
     await createTables();
     await addDefaultExercises();
     // Delete tables (if needed)
-    //await deleteTables();
+    await deleteTables(defaultexercise);
 
     // Generate database documentation
     generateDocumentation();
