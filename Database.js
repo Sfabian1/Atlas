@@ -140,8 +140,16 @@ const config = {
         table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
         table.time('time_start');
         table.time('time_end');
-      }, 
-  }
+      },   
+    },
+    {
+      name: 'users',
+      schema: (table) => {
+        table.string('username').primary();
+        table.string('password').notNullable();
+        table.bigInteger('userID').notNullable();
+      },
+    },
   ];
 
   // Function to create tables
@@ -218,7 +226,7 @@ const config = {
     await createTables();
     await addDefaultExercises();
     // Delete tables (if needed)
-    await deleteTables(defaultexercise);
+    //await deleteTables('users');
 
     // Generate database documentation
     generateDocumentation();
