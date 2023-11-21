@@ -70,7 +70,7 @@ const config = {
       name: 'profile',
       schema: (table) => {
         table.string('profile_id').primary();
-        table.string('user_id').notNullable();
+        table.integer('user_id').notNullable();
         table.string('username');
         table.timestamp('created_at');
         table.float('height').notNullable();

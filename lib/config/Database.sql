@@ -1,3 +1,4 @@
+-- Active: 1699546319520@@127.0.0.1@11121
 CREATE TABLE `security` (
   `username` varchar(255) PRIMARY KEY,
   `user_id` integer NOT NULL,
@@ -17,7 +18,7 @@ CREATE TABLE `wellness` (
 );
 
 CREATE TABLE `profile` (
-  `profile_id` integer PRIMARY KEY,
+  `profile_id` VARCHAR(255) PRIMARY KEY,
   `user_id` integer NOT NULL,
   `username` varchar(255),
   `created_at` timestamp,
