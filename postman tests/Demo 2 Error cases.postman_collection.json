@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "3268aac9-5591-42a8-a24e-2c1d6594b551",
+		"name": "Demo 2 Error cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30659452"
+	},
+	"item": [
+		{
+			"name": "invalid date error",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-11-31\",\n    \"status\": \"COMPLETED\"\n}\n"
+				},
+				"url": "http://localhost:8000/69/workouts"
+			},
+			"response": []
+		},
+		{
+			"name": "invalid time format",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:60:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-11-30\",\n    \"status\": \"COMPLETED\"\n}\n"
+				},
+				"url": "http://localhost:8000/69/workouts"
+			},
+			"response": []
+		},
+		{
+			"name": "enum constant error",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"ambiguous\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-11-30\",\n    \"status\": \"COMPLETED\"\n}\n"
+				},
+				"url": "http://localhost:8000/69/workouts"
+			},
+			"response": []
+		},
+		{
+			"name": "Repeat Values Error, press send twice",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Chest Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:30:20\",\n    \"date\": \"2023-09-30\",\n    \"status\": \"COMPLETED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/workouts"
+			},
+			"response": []
+		}
+	]
+}
