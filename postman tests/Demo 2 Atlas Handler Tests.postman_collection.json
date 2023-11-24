@@ -1,0 +1,491 @@
+{
+	"info": {
+		"_postman_id": "a7971db5-6bdf-48c0-8df9-71bf21bd0881",
+		"name": "Demo 2 Atlas Handler Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30659452"
+	},
+	"item": [
+		{
+			"name": "CREATE WORKOUT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-09-30\",\n    \"status\": \"COMPLETED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/workouts"
+			},
+			"response": []
+		},
+		{
+			"name": "GET WORKOUT",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/workouts/10011691663783924"
+			},
+			"response": []
+		},
+		{
+			"name": "LIST WORKOUT",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/workouts/10011691663783924"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE WORKOUT",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"name\" : \"Back and Biceps\",\n \"difficulty\" :\"medium\",\n \"date\": \"2023-09-12\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/workouts/10011691663783924"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE WORKOUT",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/workouts/10011691663783924"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE EXERCISE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\" :\"Uncle Ruckus\",\n\"forces\":\"push\",\n\"target_muscle_group\": \"forearm\",\n\"progression\": \"weight\" ,\n\"rest_interval\" : \"09:09:01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/exercise"
+			},
+			"response": []
+		},
+		{
+			"name": "GET  EXERCISE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/exercise/27930140744356796"
+			},
+			"response": []
+		},
+		{
+			"name": "LIST EXERCISE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/exercises/27930140744356796"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE  EXERCISE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"forces\": \"push\",\n\"rest_interval\" : \"23:22:22\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/exercise/27930140744356796"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE EXERCISE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/exercise/27930140744356796"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE SET",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"exerciseID\":\"18283878263979228\",\n\"workoutID\":\"22\",\n \"Date\" : \"2001-10-09\",\n \"difficulty\": \"easy\",\n \"time_start\" : \"09:01:12\",\n \"time_end\": \"09:02:12\",\n \"weight_metric\" : \"kg\",\n \"weight\": \"40000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/sets/"
+			},
+			"response": []
+		},
+		{
+			"name": "GET SET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/sets/26183044037495864"
+			},
+			"response": []
+		},
+		{
+			"name": "LIST SET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/sets/"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE SET",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\"weight\": \"190\",\n\"weight_metric\": \"ton\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/sets/26183044037495864"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE SET",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/sets/26183044037495864"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE PROFILE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"username\": \"Definitely_Not_Ruckus\",\n \"created_at\": \"2020-9-20\",\n \"height\": \"140\",\n \"weight\": \"500\",\n \"bmi\": \"60\",\n \"age\": \"86\"   \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "GET PROFILE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n\n\n    \n}"
+				},
+				"url": "http://localhost:8000/69/profile/15081186650517036"
+			},
+			"response": []
+		},
+		{
+			"name": "LIST PROFILE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/profile/331833174549515858"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE PROFILE",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"weight\": \"450\",\n \"bmi\": \"50\",\n \"age\": \"87\"   \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/profile/15081186650517036"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE PROFILE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/69/profile/15081186650517036"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE WELLNESS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"date\": \"2001-10-09\",\n \"mood\" : \"worst\",\n \"stress\":\"extreme\",\n \"sleep\": \"terrible\",\n \"motivation\": \"lowest\",\n \"hydration\": \"brown\",\n \"soreness\":\"severe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/21/wellness"
+			},
+			"response": []
+		},
+		{
+			"name": "GET WELLNESS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/21/wellness/890101430591890"
+			},
+			"response": []
+		},
+		{
+			"name": "LIST WELLNESS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/{{userID}}/wellness"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE WELLNESS",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"mood\" : \"normal\",\n \"stress\":\"high\",\n  \"sleep\": \"poor\",\n  \n  \"soreness\":\"severe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/21/wellness/890101430591890"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE WELLNESS",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/21/wellness/890101430591890"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "userID",
+			"value": "1"
+		}
+	]
+}
