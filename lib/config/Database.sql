@@ -46,6 +46,7 @@ CREATE TABLE `exercise` (
   `target_muscle_group` ENUM ('abdominals', 'biceps', 'calves', 'chest', 'forearm', 'glutes', 'grip', 'hamstrings', 'hips', 'lats', 'lower_back', 'middle_back', 'neck', 'quadriceps', 'shoulders', 'traps', 'triceps'),
   `force` ENUM ('push', 'pull'),
   `rest_interval` time,
+  `rest_interval_metric` ENUM ('strength', 'power', 'hypertrophy','rehabilitation','endurance'),
   `progression` ENUM ('weight', 'reps', 'time', 'distance'),
   `link` varchar(255)
 );
