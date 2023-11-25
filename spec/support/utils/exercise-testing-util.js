@@ -12,6 +12,7 @@ const generateRandomExercise = (userId, exerciseId) => {
     let force = generateRandomEnumValue(enums.enumList.forceEnum);
     let muscleGroup = generateRandomEnumValue(enums.enumList.targetMuscleEnum);
     let progression = generateRandomEnumValue(enums.enumList.progressionEnum);
+    let rest_interval_metric = generateRandomEnumValue(enums.enumList.restIntervalMetricEnum);
     let rest_interval = generateRandomRestInterval();
     let link = "http://www." + generateRandomString(6) + ".com";
 
@@ -24,6 +25,8 @@ const generateRandomExercise = (userId, exerciseId) => {
     + `\"progression\":\"${progression}\",`
     + `\"link\":\"${link}\",`
     + `\"rest_interval\":\"${rest_interval}\"}`
+    + `\"rest_interval_metric\":\"${rest_interval_metric}\"}`
+
 
     return  JSON.parse(rawExerciseString);
 }

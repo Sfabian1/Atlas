@@ -7,6 +7,42 @@
 	},
 	"item": [
 		{
+			"name": "SIGN-UP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\": \"John Doe\",\n\"password\": \"ilovesoftengnot\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/login/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN-IN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\": \"John Doe\",\n\"password\": \"ilovesoftengnot\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/login/login"
+			},
+			"response": []
+		},
+		{
 			"name": "CREATE WORKOUT",
 			"request": {
 				"method": "POST",
@@ -109,14 +145,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\" :\"Uncle Ruckus\",\n\"forces\":\"push\",\n\"target_muscle_group\": \"forearm\",\n\"progression\": \"weight\" ,\n\"rest_interval\" : \"09:09:01\" ,\n\"rest_interval_metric\": \"strength\"\n}",
+					"raw": "{\n\"name\" :\"Uncle Ruckus\",\n\"forces\":\"push\",\n\"target_muscle_group\": \"forearm\",\n\"progression\": \"weight\" ,\n\"rest_interval\" : \"09:09:01\",\n\"rest_interval_metric\" : \"strength\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/exercise"
+				"url": "http://localhost:8000/18541815352192360/exercise"
 			},
 			"response": []
 		},
@@ -137,7 +173,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/exercise/27930140744356796"
+				"url": "http://localhost:8000/18541815352192360/exercise/"
 			},
 			"response": []
 		},
