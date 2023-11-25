@@ -109,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\" :\"Uncle Ruckus\",\n\"forces\":\"push\",\n\"target_muscle_group\": \"forearm\",\n\"progression\": \"weight\" ,\n\"rest_interval\" : \"09:09:01\"\n}",
+					"raw": "{\n\"name\" :\"Uncle Ruckus\",\n\"forces\":\"push\",\n\"target_muscle_group\": \"forearm\",\n\"progression\": \"weight\" ,\n\"rest_interval\" : \"09:09:01\",\n\"rest_interval_metric\" : \"strength\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
