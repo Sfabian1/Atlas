@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "e5acba6b-a8de-4ffc-a64f-a06f13f6c210",
+		"name": "TrainingVarietyTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30666119",
+		"_collection_link": "https://gold-moon-269371.postman.co/workspace/5-4-1~df6a7c45-a77d-4f6b-bfc1-8dcb7a05b8e9/collection/30666119-e5acba6b-a8de-4ffc-a64f-a06f13f6c210?action=share&source=collection_link&creator=30666119"
+	},
+	"item": [
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"exerciseID\":\"18283878263979231\",\r\n\"workoutID\":\"22\",\r\n \"Date\" : \"2001-12-18\",\r\n \"difficulty\": \"easy\",\r\n \"time_start\" : \"09:01:12\",\r\n \"time_end\": \"09:02:12\",\r\n \"weight_metric\" : \"kg\",\r\n \"weight\": \"40000\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/69/sets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"69",
+						"sets",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"exerciseID\":\"18283878263979237\",\r\n\"workoutID\":\"22\",\r\n \"Date\" : \"2001-12-18\",\r\n \"difficulty\": \"easy\",\r\n \"time_start\" : \"09:01:12\",\r\n \"time_end\": \"09:02:12\",\r\n \"weight_metric\" : \"kg\",\r\n \"weight\": \"40000\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/69/sets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"69",
+						"sets",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"exerciseID\":\"18283878263979233\",\r\n\"workoutID\":\"23\",\r\n \"Date\" : \"2001-12-19\",\r\n \"difficulty\": \"easy\",\r\n \"time_start\" : \"09:01:12\",\r\n \"time_end\": \"09:02:12\",\r\n \"weight_metric\" : \"kg\",\r\n \"weight\": \"40000\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/69/sets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"69",
+						"sets",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"exerciseID\":\"18283878263979233\",\r\n\"workoutID\":\"23\",\r\n \"Date\" : \"2001-12-19\",\r\n \"difficulty\": \"easy\",\r\n \"time_start\" : \"09:01:12\",\r\n \"time_end\": \"09:02:12\",\r\n \"weight_metric\" : \"kg\",\r\n \"weight\": \"40000\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/68/sets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"68",
+						"sets",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"exerciseID\":\"18283878263979234\",\r\n\"workoutID\":\"24\",\r\n \"Date\" : \"2001-12-20\",\r\n \"difficulty\": \"easy\",\r\n \"time_start\" : \"09:01:12\",\r\n \"time_end\": \"09:02:12\",\r\n \"weight_metric\" : \"kg\",\r\n \"weight\": \"40000\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/69/sets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"69",
+						"sets",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"exerciseID\":\"18283878263979235\",\r\n\"workoutID\":\"25\",\r\n \"Date\" : \"2002-01-01\",\r\n \"difficulty\": \"easy\",\r\n \"time_start\" : \"09:01:12\",\r\n \"time_end\": \"09:02:12\",\r\n \"weight_metric\" : \"kg\",\r\n \"weight\": \"40000\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/69/sets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"69",
+						"sets",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -35,7 +35,7 @@ const config = {
       name: 'defaultexercise',
       schema: (table) => {
       table.string('exercise_id').primary();
-      table.string('user_id').notNullable();
+      table.string('userID').notNullable();
       table.string('name');
       table.string('target_muscle_group');
       table.string('forces');
@@ -48,15 +48,15 @@ const config = {
       name: 'security',
       schema: (table) => {
         table.string('username').primary();
-        table.string('user_id').notNullable();
+        table.string('userID').notNullable();
         table.string('password').notNullable();
       },
     },
     {
       name: 'wellness',
       schema: (table) => {
-        table.string('wellness_id').primary();
-        table.string('user_id').notNullable();
+        table.string('wellnessID').primary();
+        table.string('userID').notNullable();
         table.date('date').notNullable();
         table.enu('mood', ['worst', 'worse', 'normal', 'better', 'best']).notNullable();
         table.enu('stress', ['extreme', 'high', 'moderate', 'mild', 'relaxed']).notNullable();
@@ -70,7 +70,7 @@ const config = {
       name: 'profile',
       schema: (table) => {
         table.string('profile_id').primary();
-        table.integer('user_id').notNullable();
+        table.integer('userID').notNullable();
         table.string('username');
         table.timestamp('created_at');
         table.float('height').notNullable();
@@ -195,7 +195,7 @@ const config = {
         const exerciseID = knex.raw("REPLACE(UUID(),'-','')"); // Generating UUID for each exercise
         await knex('defaultexercise').insert({
           exercise_id: exerciseID,
-          user_id: userID,
+          userID: userID,
           name: exercise.name,
           target_muscle_group: exercise.target_muscle_group,
           forces: exercise.forces,

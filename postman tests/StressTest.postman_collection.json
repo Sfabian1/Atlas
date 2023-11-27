@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "06870a24-d577-469b-bd85-c12ecb2cb57f",
+		"name": "StressTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30666119",
+		"_collection_link": "https://gold-moon-269371.postman.co/workspace/5-4-1~df6a7c45-a77d-4f6b-bfc1-8dcb7a05b8e9/collection/30666119-06870a24-d577-469b-bd85-c12ecb2cb57f?action=share&source=collection_link&creator=30666119"
+	},
+	"item": [
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2001-10-09\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"extreme\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2001-10-10\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"high\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2001-10-11\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"moderate\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2001-10-12\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"mild\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2001-10-13\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"relaxed\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2001-12-24\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"relaxed\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/22/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"22",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2001-12-25\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"relaxed\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2001-12-28\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"relaxed\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2002-1-2\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"relaxed\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"date\": \"2002-1-3\",\r\n \"mood\" : \"worst\",\r\n \"stress\":\"relaxed\",\r\n \"sleep\": \"terrible\",\r\n \"motivation\": \"lowest\",\r\n \"hydration\": \"brown\",\r\n \"soreness\":\"severe\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/21/wellness",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"21",
+						"wellness"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
