@@ -15,13 +15,13 @@ describe("PlotHandler", () => {
             const userId = generateShortUUID();
                         const exerciseId = generateShortUUID();
                         const otherId = generateShortUUID();
-                        const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=10/22/2023&numOfDays=4`
+                        const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=2023-10-22&numOfDays=4`
                        
                         let sets = [];
-                        sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/22/2023", "01:01:35", "02:02:25"));
-                        sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/23/2023", "01:02:35", "01:03:25"));
-                        sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/24/2023", "03:03:35", "03:06:24"));
-                        sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/25/2023", "03:15:35", "03:17:25"));
+                        sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-22", "01:01:35", "02:02:25"));
+                        sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-23", "01:02:35", "01:03:25"));
+                        sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-24", "03:03:35", "03:06:24"));
+                        sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-25", "03:15:35", "03:17:25"));
 
                         let set_resp =  new CompletedResponse(JSON.stringify(sets), "application/json");
                         spyOn(ph.sh, 'ListSets').withArgs(userId).and.returnValue(set_resp);
@@ -36,13 +36,13 @@ describe("PlotHandler", () => {
                 const userId = generateShortUUID();
                             const exerciseId = generateShortUUID();
                             const otherId = generateShortUUID();
-                            const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=10/22/2023&numOfDays=4`
+                            const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=2023-10-22&numOfDays=4`
                            
                             let sets = [];
                             sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/9/2023", "01:01:35", "02:02:25"));
                             sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/31/2023", "01:02:35", "01:03:25"));
                             sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/30/2023", "03:03:35", "03:06:24"));
-                            sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/29/2023", "03:15:35", "03:17:25"));
+                            sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-29", "03:15:35", "03:17:25"));
                             
                             let set_resp =  new CompletedResponse(JSON.stringify(sets), "application/json");
                             spyOn(ph.sh, 'ListSets').withArgs(userId).and.returnValue(set_resp);
@@ -57,13 +57,13 @@ describe("PlotHandler", () => {
                     const userId = generateShortUUID();
                                 const exerciseId = generateShortUUID();
                                 const otherId = generateShortUUID();
-                                const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=10/22/2023&numOfDays=2`
+                                const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=2023-10-22&numOfDays=2`
                                
                                 let sets = [];
-                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/22/2023", "01:01:35", "02:02:25"));
-                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/23/2023", "01:02:35", "01:03:25"));
-                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/29/2023", "03:03:35", "03:06:24"));
-                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/24/2023", "03:15:35", "03:17:25"));
+                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-22", "01:01:35", "02:02:25"));
+                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-23", "01:02:35", "01:03:25"));
+                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-29", "03:03:35", "03:06:24"));
+                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-24", "03:15:35", "03:17:25"));
                                 
                                 let set_resp =  new CompletedResponse(JSON.stringify(sets), "application/json");
                                 spyOn(ph.sh, 'ListSets').withArgs(userId).and.returnValue(set_resp);
@@ -78,19 +78,19 @@ describe("PlotHandler", () => {
                     const userId = generateShortUUID();
                                 const exerciseId = generateShortUUID();
                                 const otherId = generateShortUUID();
-                                const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=10/22/2023&numOfDays=-1`
+                                const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=2023-10-22&numOfDays=-1`
                                 
                                 let sets = [];
-                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/22/2023", "01:01:35", "02:02:25"));
-                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/23/2023", "01:02:35", "01:03:25"));
-                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/29/2023", "03:03:35", "03:06:24"));
-                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/24/2023", "03:15:35", "03:17:25"));
+                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-22", "01:01:35", "02:02:25"));
+                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-23", "01:02:35", "01:03:25"));
+                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-29", "03:03:35", "03:06:24"));
+                                sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-24", "03:15:35", "03:17:25"));
                                 
                                 let set_resp =  new CompletedResponse(JSON.stringify(sets), "application/json");
                                 spyOn(ph.sh, 'ListSets').withArgs(userId).and.returnValue(set_resp);
                         
                                 let resp = await ph.getExercisePlot(url)
-                                console.log(resp);
+                              
                                 expect(resp.getCode()).toBe(400);
                                
                     });
@@ -99,19 +99,19 @@ describe("PlotHandler", () => {
                         const userId = generateShortUUID();
                                     const exerciseId = generateShortUUID();
                                     const otherId = generateShortUUID();
-                                    const url = `/${userId}/plot/?exerciseId=823791&startDate=10/22/2023&numOfDays=-1`
+                                    const url = `/${userId}/plot/?exerciseId=823791&startDate=2023-10-22&numOfDays=-1`
                                     
                                     let sets = [];
-                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/22/2023", "01:01:35", "02:02:25"));
-                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/23/2023", "01:02:35", "01:03:25"));
-                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/29/2023", "03:03:35", "03:06:24"));
-                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/24/2023", "03:15:35", "03:17:25"));
+                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-22", "01:01:35", "02:02:25"));
+                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-23", "01:02:35", "01:03:25"));
+                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-29", "03:03:35", "03:06:24"));
+                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-24", "03:15:35", "03:17:25"));
                                     
                                     let set_resp =  new CompletedResponse(JSON.stringify(sets), "application/json");
                                     spyOn(ph.sh, 'ListSets').withArgs(userId).and.returnValue(set_resp);
                             
                                     let resp = await ph.getExercisePlot(url)
-                                    console.log(resp);
+                                  
                                     expect(resp.getCode()).toBe(400);
                                    
                         });
@@ -123,16 +123,16 @@ describe("PlotHandler", () => {
                                     const url = `/${userId}/plot/?exerciseId=${exerciseId}&startDate=10/2asd/2023&numOfDays=-1`
                                     
                                     let sets = [];
-                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/22/2023", "01:01:35", "02:02:25"));
-                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/23/2023", "01:02:35", "01:03:25"));
-                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/29/2023", "03:03:35", "03:06:24"));
-                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "10/24/2023", "03:15:35", "03:17:25"));
+                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-22", "01:01:35", "02:02:25"));
+                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-23", "01:02:35", "01:03:25"));
+                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-29", "03:03:35", "03:06:24"));
+                                    sets.push(generateRandomSet(userId, exerciseId, otherId, otherId, "2023-10-24", "03:15:35", "03:17:25"));
                                     
                                     let set_resp =  new CompletedResponse(JSON.stringify(sets), "application/json");
                                     spyOn(ph.sh, 'ListSets').withArgs(userId).and.returnValue(set_resp);
                             
                                     let resp = await ph.getExercisePlot(url)
-                                    console.log(resp);
+                                 
                                     expect(resp.getCode()).toBe(400);
                                     
                         });
@@ -149,7 +149,7 @@ describe("PlotHandler", () => {
                                         spyOn(ph.sh, 'ListSets').withArgs(userId).and.returnValue(set_resp);
                                 
                                         let resp = await ph.getExercisePlot(url)
-                                        console.log(resp);
+                                     
                                         expect(resp.getCode()).toBe(400);         
                             });
                             it("test empty sets ", async () => {
@@ -164,7 +164,7 @@ describe("PlotHandler", () => {
                                             spyOn(ph.sh, 'ListSets').withArgs(userId).and.returnValue(set_resp);
                                     
                                             let resp = await ph.getExercisePlot(url)
-                                            console.log(resp);
+                                        
                                             expect(resp.getCode()).toBe(400);         
                                 });
     });
