@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"username\": \"John Doe\",\n\"password\": \"ilovesoftengnot\"\n}",
+					"raw": "{\n\"username\": \"IvanMarsichuh\",\n\"password\": \"doishowuptoclass\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -31,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"username\": \"John Doe\",\n\"password\": \"ilovesoftengnot\"\n}",
+					"raw": "{\n\"username\": \"IvanMarsichuh\",\n\"password\": \"doishowuptoclass\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -49,14 +49,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-09-30\",\n    \"status\": \"COMPLETED\"\n}",
+					"raw": "{\n    \"name\": \"Chest Day after lecture\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:50:20\",\n    \"date\": \"2001-12-30\",\n    \"status\": \"COMPLETED\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/workouts"
+				"url": "http://localhost:8000/18395173658163600/workouts"
 			},
 			"response": []
 		},
@@ -77,7 +77,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/workouts/10011691663783924"
+				"url": "http://localhost:8000/12516692413194656/workouts/26938881236392680"
 			},
 			"response": []
 		},
@@ -98,7 +98,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/workouts/10011691663783924"
+				"url": "http://localhost:8000/69/workouts"
 			},
 			"response": []
 		},
@@ -109,14 +109,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n \"name\" : \"Back and Biceps\",\n \"difficulty\" :\"medium\",\n \"date\": \"2023-09-12\"\n    \n}",
+					"raw": "{\n \"name\" : \"Leg day is what makes me cry\",\n \"difficulty\" :\"medium\",\n \"date\": \"2023-09-12\"\n    \n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/workouts/10011691663783924"
+				"url": "http://localhost:8000/26938881236392680/workouts/17496778632867940"
 			},
 			"response": []
 		},
@@ -134,7 +134,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/workouts/10011691663783924"
+				"url": "http://localhost:8000/69/workouts/17496778632867940"
 			},
 			"response": []
 		},
@@ -145,14 +145,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\" :\"Uncle Ruckus\",\n\"forces\":\"push\",\n\"target_muscle_group\": \"forearm\",\n\"progression\": \"weight\" ,\n\"rest_interval\" : \"09:09:01\",\n\"rest_interval_metric\" : \"strength\"\n}",
+					"raw": "{\n\"name\" :\"Weighted Push Ups\",\n\"target_muscle_group\": \"chest\",\n\"forces\":\"push\",\n\"rest_interval\" : \"00:09:00\",\n\"rest_interval_metric\" : \"strength\",\n\"progression\": \"weight\" ,\n\"link\" : \"https://youtu.be/Vq1O0aDZODI?si=p2YJKATfGZY_Sira\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/18541815352192360/exercise"
+				"url": "http://localhost:8000/18395173658163600/exercise"
 			},
 			"response": []
 		},
@@ -173,7 +173,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/18541815352192360/exercise/"
+				"url": "http://localhost:8000/18395173658163600/exercise/17453139791961772"
 			},
 			"response": []
 		},
@@ -194,7 +194,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/exercises/27930140744356796"
+				"url": "http://localhost:8000/18395173658163600/exercise"
 			},
 			"response": []
 		},
@@ -205,14 +205,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"forces\": \"push\",\n\"rest_interval\" : \"23:22:22\"\n}",
+					"raw": "{\n\"rest_interval_metric\": \"power\",\n\"progression\": \"reps\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/{{userID}}/exercise/27930140744356796"
+				"url": "http://localhost:8000/18395173658163600/exercise/17453139791961772"
 			},
 			"response": []
 		},
@@ -230,7 +230,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/exercise/27930140744356796"
+				"url": "http://localhost:8000/18395173658163600/exercise/17453139791961772"
 			},
 			"response": []
 		},
@@ -241,14 +241,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"exerciseID\":\"18283878263979228\",\n\"workoutID\":\"22\",\n \"Date\" : \"2001-10-09\",\n \"difficulty\": \"easy\",\n \"time_start\" : \"09:01:12\",\n \"time_end\": \"09:02:12\",\n \"weight_metric\" : \"kg\",\n \"weight\": \"40000\"\n}",
+					"raw": "{\n\"exerciseID\":\"24677855925518616\",\n\"workoutID\":\"15466156161699956\",\n \"Date\" : \"2001-10-05\",\n \"difficulty\": \"hard\",\n \"time_start\" : \"10:10:12\",\n \"time_end\": \"10:25:12\",\n \"rest_period\":\"03:00:00\",\n \"weight_metric\" : \"lbs\",\n \"weight\": \"30\",\n \"num_of_times\": \"5\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/sets/"
+				"url": "http://localhost:8000/18395173658163600/sets"
 			},
 			"response": []
 		},
@@ -269,7 +269,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/sets/26183044037495864"
+				"url": "http://localhost:8000/18395173658163600/sets/11248819828739148"
 			},
 			"response": []
 		},
@@ -290,7 +290,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/{{userID}}/sets/"
+				"url": "http://localhost:8000/18395173658163600/sets/"
 			},
 			"response": []
 		},
@@ -301,14 +301,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\n\"weight\": \"190\",\n\"weight_metric\": \"ton\"\n    \n}",
+					"raw": "{\n\n\"Date\":\"2001-10-13\"\n\n    \n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/sets/26183044037495864"
+				"url": "http://localhost:8000/18395173658163600/sets/17618918171789580"
 			},
 			"response": []
 		},
@@ -326,7 +326,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/sets/26183044037495864"
+				"url": "http://localhost:8000/18395173658163600/sets/29785961362284876"
 			},
 			"response": []
 		},
@@ -344,7 +344,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/profile"
+				"url": "http://localhost:8000/26938881236392680/profile"
 			},
 			"response": []
 		},
@@ -360,7 +360,7 @@
 					"mode": "raw",
 					"raw": "{\n\n\n\n\n    \n}"
 				},
-				"url": "http://localhost:8000/69/profile/15081186650517036"
+				"url": "http://localhost:8000/26938881236392680/profile/15081186650517036"
 			},
 			"response": []
 		},
@@ -381,7 +381,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/{{userID}}/profile/331833174549515858"
+				"url": "http://localhost:8000/26938881236392680/profile/331833174549515858"
 			},
 			"response": []
 		},
@@ -399,7 +399,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/profile/15081186650517036"
+				"url": "http://localhost:8000/26938881236392680/profile/15081186650517036"
 			},
 			"response": []
 		},
@@ -428,14 +428,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n \"date\": \"2001-10-09\",\n \"mood\" : \"worst\",\n \"stress\":\"extreme\",\n \"sleep\": \"terrible\",\n \"motivation\": \"lowest\",\n \"hydration\": \"brown\",\n \"soreness\":\"severe\"\n}",
+					"raw": "{\n \"date\": \"2001-10-30\",\n \"mood\" : \"normal\",\n \"stress\":\"high\",\n \"sleep\": \"terrible\",\n \"motivation\": \"highest\",\n \"hydration\": \"brown\",\n \"soreness\":\"severe\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/21/wellness"
+				"url": "http://localhost:8000/17857858699144792/wellness"
 			},
 			"response": []
 		},
@@ -456,7 +456,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/21/wellness/890101430591890"
+				"url": "http://localhost:8000/17857858699144792/wellness/890101430591890"
 			},
 			"response": []
 		},
@@ -477,7 +477,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/{{userID}}/wellness"
+				"url": "http://localhost:8000/17857858699144792/wellness"
 			},
 			"response": []
 		},
@@ -495,7 +495,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/21/wellness/890101430591890"
+				"url": "http://localhost:8000/17857858699144792/wellness/22355234293725120"
 			},
 			"response": []
 		},
@@ -513,7 +513,53 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/21/wellness/890101430591890"
+				"url": "http://localhost:8000/17857858699144792/wellness/890101430591890"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE PLOT",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/18395173658163600/plot?exerciseId=24677855925518616&startDate=2001-10-01&numOfDays=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"18395173658163600",
+						"plot"
+					],
+					"query": [
+						{
+							"key": "exerciseId",
+							"value": "24677855925518616"
+						},
+						{
+							"key": "startDate",
+							"value": "2001-10-01"
+						},
+						{
+							"key": "numOfDays",
+							"value": "5"
+						}
+					]
+				}
 			},
 			"response": []
 		}

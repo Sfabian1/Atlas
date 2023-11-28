@@ -13,9 +13,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-11-31\",\n    \"status\": \"COMPLETED\"\n}\n"
+					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:70:20\",\n    \"timeEnd\": \"09:710:20\",\n    \"date\": \"2001-11-30\",\n    \"status\": \"COMPLETED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
-				"url": "http://localhost:8000/69/workouts"
+				"url": "http://localhost:8000/26938881236392680/workouts"
 			},
 			"response": []
 		},
@@ -26,9 +31,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:60:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-11-30\",\n    \"status\": \"COMPLETED\"\n}\n"
+					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:70:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-11-30\",\n    \"status\": \"COMPLETED\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
-				"url": "http://localhost:8000/69/workouts"
+				"url": "http://localhost:8000/18395173658163600/workouts"
 			},
 			"response": []
 		},
@@ -39,9 +49,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"ambiguous\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-11-30\",\n    \"status\": \"COMPLETED\"\n}\n"
+					"raw": "{\n    \"name\": \"Back Day\",\n    \"difficulty\": \"ambiguous\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:24:20\",\n    \"date\": \"2001-11-30\",\n    \"status\": \"COMPLETED\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
-				"url": "http://localhost:8000/69/workouts"
+				"url": "http://localhost:8000/26938881236392680/workouts"
 			},
 			"response": []
 		},
@@ -52,14 +67,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Chest Day\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:30:20\",\n    \"date\": \"2023-09-30\",\n    \"status\": \"COMPLETED\"\n}",
+					"raw": "{\n    \"name\": \"Chest Day Repeat1\",\n    \"difficulty\": \"hard\",\n    \"timeStart\": \"09:20:20\",\n    \"timeEnd\": \"09:30:20\",\n    \"date\": \"2023-09-30\",\n    \"status\": \"COMPLETED\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/69/workouts"
+				"url": "http://localhost:8000/26938881236392680/workouts"
 			},
 			"response": []
 		}
