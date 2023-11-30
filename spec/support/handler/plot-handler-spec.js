@@ -1,11 +1,12 @@
 
 const exercise_testing_util = require("../utils/exercise-testing-util.js");
-const {PlotHandler, TimeSeries, Plot} = require("../../../lib/main/handlers/plot-handler.js");
+const {PlotHandler, TimeSeries, ExercisePlot, WellnessTimeSeries, WellnessPlot} = require("../../../lib/main/handlers/plot-handler.js");
 const { generateRandomSet } = require("../utils/set-testing-util.js");
 const { generateShortUUID } = require("../../../lib/main/util/util.js");
 const jasmine = require("jasmine");
 const { momentDateFormat } = require("../../../lib/main/constants/server-constants.js");
 const { CompletedResponse, ValidaitonError } = require("../../../lib/main/util/response.js");
+const { generateRandomWellness} = require("../utils/wellness-testing-util.js");
 
 const ph = new PlotHandler();
 
@@ -168,4 +169,110 @@ describe("PlotHandler", () => {
                                             expect(resp.getCode()).toBe(400);         
                                 });
     });
+
+    describe("getWellnessPlot", () => {
+        it("test getWellnessPlot with all valid parameters ", async () => {
+            const userId = generateShortUUID();
+            const wellnessId = generateShortUUID();
+            const url = `/${userId}/plot/?metric=mood&startDate=2023-11-20&numOfDays=3`
+                                                   
+            let wellness = [];
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-20"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-21"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-22"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-23"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-24"));
+                            
+            let wellness_resp =  new CompletedResponse(JSON.stringify(wellness), "application/json");
+            spyOn(ph.wh, 'ListWellness').withArgs(userId).and.returnValue(wellness_resp);
+                                            
+            let actual_resp = (await ph.getWellnessPlot(url)).getMessage();
+            actual_resp = JSON.parse(actual_resp);
+            expect(actual_resp.timeSeriesWellness.length).toEqual(4);
+        });
+        it("test getWellnessPlot with an invalid metric", async () => {
+            const userId = generateShortUUID();
+            const wellnessId = generateShortUUID();
+            const url = `/${userId}/plot/?metric=inspiration&startDate=2023-11-20&numOfDays=3`
+                                                   
+            let wellness = [];
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-20"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-21"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-22"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-23"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-24"));
+                            
+            let wellness_resp =  new CompletedResponse(JSON.stringify(wellness), "application/json");
+            spyOn(ph.wh, 'ListWellness').withArgs(userId).and.returnValue(wellness_resp); 
+            let resp = await ph.getWellnessPlot(url)    
+            expect(resp.getCode()).toBe(400);         
+        });
+        it("test getWellnessPlot with an invalid number of days", async () => {
+            const userId = generateShortUUID();
+            const wellnessId = generateShortUUID();
+            const url = `/${userId}/plot/?metric=hydration&startDate=2023-11-20&numOfDays=33`
+                                                   
+            let wellness = [];
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-20"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-21"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-22"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-23"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-24"));
+                            
+            let wellness_resp =  new CompletedResponse(JSON.stringify(wellness), "application/json");
+            spyOn(ph.wh, 'ListWellness').withArgs(userId).and.returnValue(wellness_resp);
+            let resp = await ph.getWellnessPlot(url)        
+            expect(resp.getCode()).toBe(400);               
+        });
+        it("test getWellnessPlot with an invalid startDate", async () => {
+            const userId = generateShortUUID();
+            const wellnessId = generateShortUUID();
+            const url = `/${userId}/plot/?metric=sleep&startDate=2023-11-49&numOfDays=2`
+                                                   
+            let wellness = [];
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-20"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-21"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-22"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-23"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-24"));
+                            
+            let wellness_resp =  new CompletedResponse(JSON.stringify(wellness), "application/json");
+            spyOn(ph.wh, 'ListWellness').withArgs(userId).and.returnValue(wellness_resp);
+            let resp = await ph.getWellnessPlot(url)        
+            expect(resp.getCode()).toBe(400);               
+        });
+        it("test getWellnessPlot with no wellness entries recorded for that user", async () => {
+            const userId = generateShortUUID();
+            const wellnessId = generateShortUUID();
+            const url = `/${userId}/plot/?metric=sleep&startDate=2023-11-49&numOfDays=2`
+                                                   
+            let wellness = [];
+                            
+            let wellness_resp =  new CompletedResponse(JSON.stringify(wellness), "application/json");
+            spyOn(ph.wh, 'ListWellness').withArgs(userId).and.returnValue(wellness_resp);
+            let resp = await ph.getWellnessPlot(url)        
+            expect(resp.getCode()).toBe(400);      
+            expect(wellness.length).toEqual(0);         
+        });
+        it("test getWellnessPlot with an empty URL", async () => {
+            const userId = generateShortUUID();
+            const wellnessId = generateShortUUID();
+            const url = '';
+                                                   
+            let wellness = [];
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-20"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-21"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-22"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-23"));
+            wellness.push(generateRandomWellness(userId, wellnessId, "2023-11-24"));
+                            
+            let wellness_resp =  new CompletedResponse(JSON.stringify(wellness), "application/json");
+            spyOn(ph.wh, 'ListWellness').withArgs(userId).and.returnValue(wellness_resp);
+            let resp = await ph.getWellnessPlot(url)        
+            expect(resp.getCode()).toBe(400);               
+        });
+        
+
+    });
+
 });
