@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Workout</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f7f7f7;
+    }
+
+    .workout-form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 350px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        margin-right: 15px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group input[type="time"],
+    .form-group select,
+    .form-group button {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-group button {
+        background-color: #ffa500;
+        color: white;
+        cursor: pointer;
+    }
+
+    .form-group button:hover {
+        background-color: #e69500;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .back-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 8px 15px;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .back-btn:hover {
+        background-color: #5a6268;
+    }
+</style>
+</head>
+<body>
+
+<div class="workout-form">
+    <button class="back-btn" onclick="goBack()">Back</button>
+  <h2>Workout Information</h2>
+  <form id="workoutForm">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="difficulty">Difficulty:</label>
+      <select id="difficulty" name="difficulty" required>
+        <option value="">Select difficulty</option>
+        <option value="easy">easy</option>
+        <option value="medium">medium</option>
+        <option value="hard">hard</option>
+        <option value="near_maximum">near_maximum</option>
+        <option value="limit">limit</option>
+        <option value="failure">failure</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select id="status" name="status" required>
+        <option value="">Select status</option>
+        <option value="IN_PROGRESS">IN_PROGRESS</option>
+        <option value="COMPLETED">COMPLETED</option>
+        <option value="STARTED">STARTED</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required readonly>
+    </div>
+    <div class="form-group">
+      <label for="timeStart">Time Start:</label>
+      <input type="time" id="timeStart" name="timeStart" required readonly>
+    </div>
+    <div class="form-group">
+      <label for="timeEnd">Time End:</label>
+      <input type="time" id="timeEnd" name="timeEnd" required readonly>
+    </div>
+    <div class="form-group">
+      <button type="submit" id="begin">CREATE</button>
+    </div>
+  </form>
+</div>
+
+<script>
+    function setCurrentDateAndTime() {
+        const now = new Date();
+        const dateField = document.getElementById('date');
+        const timeStartField = document.getElementById('timeStart');
+        const timeEndField = document.getElementById('timeEnd');
+
+        dateField.value = now.toISOString().split('T')[0];
+
+        timeStartField.value = now.toISOString().split('T')[1].substring(0, 5);
+
+        const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
+        timeEndField.value = oneHourLater.toISOString().split('T')[1].substring(0, 5);
+    }
+
+    function getUserIDFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('userID');
+    }
+
+    function goBack() {
+        const userID = getUserIDFromURL();
+        window.location.href = 'workoutViewer.html?userID=' + userID;
+    }
+
+    function createWorkout(event) {
+        event.preventDefault();
+        const userID = getUserIDFromURL();
+
+        const workoutData = {
+            name: document.getElementById('name').value,
+            difficulty: document.getElementById('difficulty').value,
+            status: document.getElementById('status').value,
+            date: document.getElementById('date').value,
+            timeStart: document.getElementById('timeStart').value,
+            timeEnd: document.getElementById('timeEnd').value 
+        };
+
+        fetch('http://localhost:8000/' + userID + '/workouts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(workoutData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            alert('Response from server: ' + data);
+            window.location.href = 'workoutViewer.html?userID=' + userID;
+        })
+        .catch(error => {
+            console.error('Error saving workout:', error);
+            alert('Error saving workout: ' + error);
+        });
+    }
+
+    window.onload = function() {
+        setCurrentDateAndTime();
+        document.getElementById('workoutForm').addEventListener('submit', createWorkout);
+    };
+  
+</script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List of Workouts</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  #workoutListHeader {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #workoutListContainer {
+    width: 300px;
+    max-height: 400px; 
+    overflow-y: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .workoutItem {
+    width: calc(100%);
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .workoutItem:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  #workoutListContainer + button {
+    margin-top: 20px; 
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+
+  #workoutListContainer + button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<h2 id="workoutListHeader">List of Workouts</h2>
+
+<div id="workoutListContainer">
+</div>
+
+<button id="createWorkoutButton">Create</button>
+
+<script>
+const workoutsJson = `[{"name":"Workout A","date":"2023-04-01","status":"IN_PROGRESS"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"}]`;
+
+  function formatDate(isoString) {
+    return isoString.split('T')[0];
+  }
+
+  function displayWorkouts(workouts) {
+    const container = document.getElementById('workoutListContainer');
+    container.innerHTML = ''; 
+
+    workouts.forEach(workout => {
+    workout.date = formatDate(workout.date); 
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'workoutItem';
+    button.onclick = function() {
+      window.location.href = 'workoutSpec.html?workoutID=' + workout.workoutID + '&userID=' + workout.userID;
+    };
+
+    button.innerHTML = `
+      <strong>Name:</strong> ${workout.name}<br>
+      <strong>Date:</strong> ${workout.date}<br>
+      <strong>Status:</strong> ${workout.status}
+    `;
+
+    container.appendChild(button);
+    });
+  }
+
+  function fetchWorkouts(userID) {
+    fetch('http://localhost:8000/' + userID + '/workouts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok: ' + response.statusText);
+      }
+    return response.json();
+    })
+    .then(data => {
+      displayWorkouts(data);
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  }
+
+  function getUserIDFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('userID');
+  }
+
+  window.onload = function() {
+    const userID = 69; // REPLACE HERE
+    fetchWorkouts(userID);
+    document.getElementById('createWorkoutButton').addEventListener('click', function() {
+    window.location.href = 'createWorkout.html?userID=' + userID;
+    });
+  };
+
+</script>
+
+</body>
+</html>
