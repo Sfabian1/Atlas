@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Atlas Shrugged</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black; 
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .big-header {
+            color: #FFA500;
+        }
+
+        form {
+            margin-top: 20px;
+            background-color: #FFA500; 
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .bottom-image {
+            width: 40%;
+            height: auto;   
+            margin-top: 10px;
+        }
+
+        #signupForm {
+            background-color: #FFA500; 
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="big-header">Welcome to Atlas Shrugged</h1>
+
+        <form id="signupForm" action="#" method="post" onsubmit="createAccount(event)">
+            <h2> Sign Up Now!</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <img src="/Atlas/lib/html_files/Atlas.png" alt="Bottom Image" class="bottom-image">
+    </div>
+
+    <script>
+        async function createAccount(event) {
+            event.preventDefault();
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+        
+            try {
+                const response = await fetch('http://localhost:8000/login/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    }),
+                });
+        
+                if (response.ok) {
+                    const data = await response.text();
+                    window.location.href = 'createProfile.html?userID=' + data;
+                } else {
+                    alert('Username or Password Already Exists');
+                }
+            } catch (error) {
+                console.error('Error during account creation:', error);
+            }
+        }        
+    </script>
+</body>
+</html>
