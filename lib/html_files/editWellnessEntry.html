@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Wellness Entry</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Edit Wellness Entry</h1>
+  </div>
+
+  <div class="container">
+    <form id="editForm">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="mood">Mood:</label>
+      <select id="mood" name="mood" required>
+        <option value="best">best</option>
+        <option value="better">better</option>
+        <option value="normal">normal</option>
+        <option value="worse">worse</option>
+        <option value="worst">worst</option>
+      </select>
+
+      <label for="motivation">Motivation:</label>
+      <select id="motivation" name="motivation" required>
+        <option value="highest">highest</option>
+        <option value="higher">higher</option>
+        <option value="normal">normal</option>
+        <option value="lower">lower</option>
+        <option value="lowest">lowest</option>
+      </select>
+
+      <label for="stress">Stress:</label>
+      <select id="stress" name="stress" required>
+        <option value="relaxed">relaxed</option>
+        <option value="mild">mild</option>
+        <option value="moderate">moderate</option>
+        <option value="high">high</option>
+        <option value="extreme">extreme</option>
+      </select>
+
+      <label for="hydration">Hydration:</label>
+      <select id="hydration" name="hydration" required>
+        <option value="clear">clear</option>
+        <option value="light">light</option>
+        <option value="yellow">yellow</option>
+        <option value="orange">orange</option>
+        <option value="brown">brown</option>
+      </select>
+
+      <label for="sleep">Sleep:</label>
+      <select id="sleep" name="sleep" required>
+        <option value="excellent">excellent</option>
+        <option value="good">good</option>
+        <option value="fair">fair</option>
+        <option value="poor">poor</option>
+        <option value="terrible">terrible</option>
+      </select>
+
+      <label for="soreness">Soreness:</label>
+      <select id="soreness" name="soreness" required>
+        <option value="none">none</option>
+        <option value="mild">mild</option>
+        <option value="moderate">moderate</option>
+        <option value="strong">strong</option>
+        <option value="severe">severe</option>
+      </select>
+
+      <button type="button" onclick="saveChanges()">Save Changes</button>
+    </form>
+  </div>
+
+  <script>
+ function getWellnessIDFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('wellnessID');
+    }    
+    
+    window.onload = async function () {
+    const editForm = document.getElementById('editForm');
+
+    // Add a submit event listener to the form
+    editForm.addEventListener('submit', async function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Your existing logic to fetch and populate data goes here
+        const userID = getUserIDFromURL();
+        const wellnessID = getWellnessIDFromURL();
+
+        if (!wellnessID) {
+            console.error('Wellness ID is missing.');
+            return;
+        }
+
+        try {
+            // Fetch the original wellness entry data
+            const response = await fetch(`http://localhost:8000/${userID}/wellness/${wellnessID}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch wellness entry');
+            }
+
+            const data = await response.json();
+            const entry = data; // Adjust this based on the actual structure of your data
+            const formattedDate = new Date(entry.date).toISOString().split('T')[0];
+
+            // Populate the form fields with the existing data
+            editForm.elements.date.value = formattedDate;x
+            editForm.elements.mood.value = entry.mood;
+            editForm.elements.motivation.value = entry.motivation;
+            editForm.elements.stress.value = entry.stress;
+            editForm.elements.hydration.value = entry.hydration;
+            editForm.elements.sleep.value = entry.sleep;
+            editForm.elements.soreness.value = entry.soreness;
+        } catch (error) {
+            console.error('Error fetching wellness entry:', error);
+        }
+    });
+};
+
+    function saveChanges() {
+      const userID = 17857858699144792;
+      const wellnessID = getWellnessIDFromURL(); // Implement the getWellnessIDFromURL function
+      const editForm = document.getElementById('editForm');
+
+      // Collect the updated data from the form
+      const updatedData = {
+        date: editForm.elements.date.value,
+        mood: editForm.elements.mood.value,
+        motivation: editForm.elements.motivation.value,
+        stress: editForm.elements.stress.value,
+        hydration: editForm.elements.hydration.value,
+        sleep: editForm.elements.sleep.value,
+        soreness: editForm.elements.soreness.value
+      };
+
+      // Send the updated data to the server
+      fetch(`http://localhost:8000/${userID}/wellness/${wellnessID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+      })
+      .then(response => {
+            if (!response.ok) {
+            throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+          console.log('Changes saved successfully:', data);
+          alert('Changes saved successfully ');
+          window.location.href = 'wellnessHistory.html?userID=' + userID;
+
+        })
+        .catch(error => {
+          console.error('Error saving changes:', error);
+          alert('Error saving wellness entry: ' + error);
+
+        });
+    }
+  </script>
+</body>
+</html>
