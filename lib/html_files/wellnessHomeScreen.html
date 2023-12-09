@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            padding: 2em 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4em 0;
+            text-align: center;
+        }
+
+        .home-container,
+        .features-container,
+        .workouts-container,
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            color: #3498db;
+        }
+
+        section p {
+            color: #666;
+        }
+
+        section img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Atlas Shrugged</h1>
+            <h2> Wellness</h2>
+            <p>“True enjoyment is from the activity of the 
+                mind and exercise of the body; the two are ever united.” -Wilhelm Von Humboldt</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#home">Submit Your Wellness Data</a>
+            <a href="#features">View Wellness History</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="home-container">
+            <h2>Input Your Own Wellness Data</h2>
+            <p>Track how you feel about your workouts</p>
+            <img src="fitness-app-image.jpg" alt="Fitness App Image">
+            <button type="button" onclick="returnToSubmit()">Submit Your Wellness Data Now</button>
+
+            
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="features-container">
+            <h2>View Your Wellness Data at Any Time</h2>
+            <p>Explore the features that make our app the perfect fitness companion.</p>
+            <button type="button" onclick="viewWellnessHistory()">Review Wellness History</button>
+
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-container">
+            <h2>Get in Touch</h2>
+            <p>Contact IDefinitelyLoveSoftwareENG@gmail.com</p>
+        </div>
+    </section>
+
+    <script>
+     function getUserIDFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('userID');
+    }
+
+     function returnToSubmit() {
+     const  userID = getUserIDFromURL();
+      window.location.href = 'submitWellness.html';
+    }
+
+    function viewWellnessHistory() {
+        const  userID = getUserIDFromURL();
+      window.location.href = 'wellnessHistory.html';
+    }
+
+    window.onload = function() {
+        const userID = 17857858699144792; // REPLACE HERE
+    };
+
+
+
+    </script>
+
+</body>
+</html>

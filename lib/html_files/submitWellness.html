@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellness Dashboard</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .wellness-data {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+    }
+
+    .input-label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .rectangle {
+      width: 150px;
+      height: 50px;
+      background-color: #2ecc71;
+      border-radius: 8px;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      line-height: 2.5;
+      font-size: 14px;
+    }
+
+    .dropdown {
+      width: 150px;
+      height: 30px;
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid #3498db;
+      border-radius: 5px;
+    }
+    .button-container {
+  display: flex; /* Use flexbox to layout buttons */
+  justify-content: space-between; /* Space items evenly */
+  margin-bottom: 10px; /* Add some margin between buttons and table */
+}
+
+.button-container button {
+  background-color: #007BFF; /* Blue color for buttons */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.button-container button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>Welcome Back!</h1>
+    <p>Input Your Wellness Data </span></p>
+  </div>
+  <div class="button-container">
+    <button type="button" onclick="viewWellnessHistory()">View Wellness History</button>
+  <button type="button" onclick="returnToWellnessHomeScreen()">Return to Wellness Main Screen</button>
+  </div>
+  <div class="section">
+    <h2>Hey, how was your workout today?</h2>
+  </div>
+
+  <div class="wellness-data">
+
+    <label for="dateInput">Enter Date:</label>
+    <input type="text" id="dateInput" placeholder="YYYY-MM-DD" />
+
+    <button type="button" onclick="getTodaysDate()">Get Today's Date</button>
+    <script>
+      function getTodaysDate() {
+        var today = new Date();
+
+        var date = today.getDate();
+        var month = today.getMonth() + 1; // Months are zero-based
+        var year = today.getFullYear();
+
+        var formattedDate = year + "-" + month + "-" + date;
+
+        document.getElementById("dateInput").value = formattedDate;
+      }
+    </script>
+
+    <div class="rectangle" id="moodContainer">
+      Mood
+      <select class="dropdown" id="moodDropdown" onchange="submitDropdown('mood')">
+        <option value="best">best</option>
+        <option value="better">better</option>
+        <option value="normal">normal</option>
+        <option value="worse">worse</option>
+        <option value="worst">worst</option>
+      </select>
+    </div>
+
+    <div class="rectangle" id="motivationContainer">
+      Motivation
+      <select class="dropdown" id="motivationDropdown" onchange="submitDropdown('motivation')">
+        <option value="highest">highest</option>
+        <option value="higher">higher</option>
+        <option value="normal">normal</option>
+        <option value="lower">lower</option>
+        <option value="lowest">lowest</option>
+      </select>
+    </div>
+
+    <div class="rectangle" id="stressContainer">
+      Stress
+      <select class="dropdown" id="stressDropdown" onchange="submitDropdown('stress')">
+        <option value="relaxed">relaxed</option>
+        <option value="mild">mild</option>
+        <option value="moderate">moderate</option>
+        <option value="high">high</option>
+        <option value="extreme">extreme</option>
+      </select>
+    </div>
+
+    <div class="rectangle" id="hydrationContainer">
+      Hydration
+      <select class="dropdown" id="hydrationDropdown" onchange="submitDropdown('hydration')">
+        <option value="clear">clear</option>
+        <option value="light">light</option>
+        <option value="yellow">yellow</option>
+        <option value="orange">orange</option>
+        <option value="brown">brown</option>
+      </select>
+    </div>
+
+    <div class="rectangle" id="sleepContainer">
+      Sleep
+      <select class="dropdown" id="sleepDropdown" onchange="submitDropdown('sleep')">
+        <option value="excellent">excellent</option>
+        <option value="good">good</option>
+        <option value="fair">fair</option>
+        <option value="poor">poor</option>
+        <option value="terrible">terrible</option>
+      </select>
+    </div>
+
+    <div class="rectangle" id="sorenessContainer">
+      Soreness
+      <select class="dropdown" id="sorenessDropdown" onchange="submitDropdown('soreness')">
+        <option value="none">none</option>
+        <option value="mild">mild</option>
+        <option value="moderate">moderate</option>
+        <option value="strong">strong</option>
+        <option value="severe">severe</option>
+      </select>
+    </div>
+    <button type="button" onclick="submitForm()">Submit</button>
+  </div>
+
+  <script>
+    function getUserIDFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('userID');
+    }
+    function submitDropdown(category) {
+      const selectedValue = document.getElementById(`${category}Dropdown`).value;
+      console.log(`Category: ${category}, Value: ${selectedValue}`);
+    }
+    function returnToSubmitFOrm() {
+        const userID = getUserIDFromURL();
+        window.location.href = 'wellnessHomeScreen.html?userID=' + userID;
+    }
+
+    function submitForm() {
+      const userID = getUserIDFromURL();
+
+      const wellnessDataSubmitted = {
+      userID: userID,
+      date: document.getElementById("dateInput").value,
+       mood: document.getElementById("moodDropdown").value,
+       stress: document.getElementById("stressDropdown").value,
+       sleep: document.getElementById("sleepDropdown").value,
+       motivation: document.getElementById("motivationDropdown").value,
+       hydration: document.getElementById("hydrationDropdown").value,
+       soreness: document.getElementById("sorenessDropdown").value
+      }
+
+      fetch('http://localhost:8000/' + userID + '/wellness', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(wellnessDataSubmitted)
+        })
+      .then(response => {
+            if (!response.ok) {
+              console.log(wellnessDataSubmitted);
+
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            alert('Response from server: ' + data);
+            window.location.href = 'wellnessHistory.html?userID=' + userID;
+        })
+        .catch(error => {
+            console.error('Error saving Wellness Data Input:', error);
+            alert('Error saving Wellness Data Input: ' + error);
+        });
+    }
+  </script>
+  
+    
+  <script>
+  
+      function viewWellnessHistory() {
+        window.location.href = "wellnessHistory.html";
+        
+      }
+
+      function returnToWellnessHomeScreen() {
+        window.location.href = "wellnessHomeScreen.html";
+        
+      }
+  </script>
+</body>
+</html>
