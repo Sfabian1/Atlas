@@ -1,0 +1,133 @@
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh; 
+}
+
+h1#title {
+  color: #ddb121;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center; 
+  font-size: 2.5em; 
+}
+
+h2#setInfoHeading {
+  color: #100f0f;
+  text-align: center; 
+  font-size: 1.5em;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.tiny-link {
+  font-size: 17px; /* Adjust the font size as needed */
+  margin-left: 5px; /* Add some space between "Set Information" and "List Sets" */
+  color: #3b05ee; /* Set the link color */
+}
+
+.tiny-link:hover {
+  color: #555; /* Adjust the link color on hover if needed */
+}
+/* Add this CSS to your stylesheet or in a <style> tag in your HTML */
+.set-container {
+  background-color: gray; /* Gray background outside of the border */
+  padding: 10px; /* Add some padding for spacing */
+  margin-bottom: 10px; /* Add margin to separate sets */
+}
+
+.set-info {
+  background-color: white; /* White box for set information */
+  padding: 10px; /* Add padding inside the box */
+  border: 1px solid black; /* Add a border around the box */
+}
+
+
+
+#setInfoForm {
+  background: #d4cabc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  width: 80%; 
+  max-width: 500px; 
+}
+
+#setInfoForm form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#setInfoForm label {
+  margin: 10px 0;
+  width: 100%;
+  color: #2b2424; 
+}
+
+#setInfoForm input[type="date"],
+#setInfoForm select,
+#setInfoForm input[type="number"],
+#setInfoForm input[type="text"] {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%; 
+}
+
+#timerDisplay {
+  font-size: 3em; 
+  margin: 20px 0; 
+  color: #333; 
+  width: 100%;
+  text-align: center;
+}
+
+/* Button styles */
+#setInfoForm button {
+  padding: 10px 20px;
+  background-color: #f1ba08;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+  flex-grow: 1; 
+}
+
+#setInfoForm button:hover {
+  background-color: #f5da80;
+}
+
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Center buttons horizontally */
+  width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  #setInfoForm input,
+  #setInfoForm select {
+    width: 100%; 
+  }
+  #setInfoForm {
+    width: 90%; 
+  }
+  .buttons-container {
+    flex-direction: column;
+  }
+  .buttons-container button {
+    width: 100%; 
+  }
+}

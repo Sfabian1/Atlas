@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const db = require("./lib/main/util/sqlconnector.js");
 const genUUID = require("./lib/main/util/util.js");
+const {generateShortUUID, getUserID, getTypeID} = require("./lib/main/util/util.js");
 
 const config = {
   app: {
@@ -8,10 +9,10 @@ const config = {
     host: 'localhost'
   },
   db: {
-    host:"mysql-b1360a5-sam2001fabian-79c2.a.aivencloud.com",
+    host:"mysql-3e3b92e365-scarletmail-6b29.a.aivencloud.com",
     user:"avnadmin",
-    password:"AVNS_q-_1nPk2Wfg88rY72Nr",
-    port:"10623",
+    password:"AVNS_JlLpmJ4TbLc1BfkZ2io",
+    port:"28768",
     database:"defaultdb"
   }
 };
@@ -34,7 +35,7 @@ const config = {
     {
       name: 'defaultexercise',
       schema: (table) => {
-      table.string('exercise_id').primary();
+      table.string('exerciseID').primary();
       table.string('userID').notNullable();
       table.string('name');
       table.string('target_muscle_group');
@@ -132,15 +133,15 @@ const config = {
         table.string('workoutID').notNullable();
         table.date('Date').notNullable();
         table.integer('num_of_times');
-        table.integer('weight');
-        table.enu('weight_metric', ['lbs', 'kg', 'ton', 'tonne']);
-        table.integer('distance');
-        table.enu('distance_metric', ['feet', 'yards', 'miles', 'meters', 'kilometers']);
+        table.enu('metric', ['weight', 'distance', 'none']);
+        table.enu('unit', ['lbs', 'kg', 'ton', 'tonne', 'feet', 'yards', 'miles', 'meters', 'kilometers']);
+        table.integer('metric_value');
         table.time('rep_time');
         table.time('rest_period');
         table.enu('difficulty', ['easy', 'medium', 'hard', 'near_maximum', 'limit', 'failure']);
         table.time('time_start');
         table.time('time_end');
+        table.integer('rpe');
       },   
     },
     {
@@ -192,9 +193,9 @@ const config = {
   
       // Insert default exercises into the database
       for (const exercise of defaultExercises) {
-        const exerciseID = knex.raw("REPLACE(UUID(),'-','')"); // Generating UUID for each exercise
+        const exercise_ID = generateShortUUID(); // Generating UUID for each exercise
         await knex('defaultexercise').insert({
-          exercise_id: exerciseID,
+          exerciseID: exercise_ID,
           userID: userID,
           name: exercise.name,
           target_muscle_group: exercise.target_muscle_group,

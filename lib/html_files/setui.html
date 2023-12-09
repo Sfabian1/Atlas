@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workout Sets</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="setInfoForm">  
+    <h1 id="title">Atlas Shrugged</h1>
+    <h2 id="setInfoHeading">
+        <span>Set Information:</span>
+        <a href="ListSetUI.html" class="tiny-link">View All Sets</a>
+    </h2>
+    
+    <form id="setForm">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="workoutDropdown">Workout:</label>
+        <select id="workoutDropdown" name="workoutDropdown">
+        <!-- Options added in da script -->
+        </select>
+
+        <label for="exercise">Exercise:</label>
+     
+        <select id="exercise" name="exercise">
+        </select>
+        
+
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty" name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="near_maximum">Near Max</option>
+            <option value="limit">Limit</option>
+            <option value="failure">Failure</option>
+        </select>
+
+        
+        <label for="metric">Metric:</label>
+        <select id="metric" name="metric">
+            <option value="Weight">Weight</option>
+            <option value="Distance">Distance</option>
+            <option value="None" selected>None</option>
+        </select>
+
+        <label for="unit">Unit:</label>
+        <select id="unit" name="unit">
+            <!-- script so all units dont come at once-->
+        </select>
+
+        <label for="value">Value:</label>
+        <input type="number" id="value" name="value">
+
+        <label for="repTime">Rep Time:</label>
+        <input type="text" id="repTime" name="repTime" placeholder="hh:mm:ss" pattern="\d{2}:\d{2}:\d{2}">
+        
+        
+        
+        <label for="restPeriod">Rest Period:</label>
+        <input type="text" id="restPeriod" name="restPeriod" placeholder="hh:mm:ss" pattern="\d{2}:\d{2}:\d{2}">
+        
+       
+        <button type="button" id="startRepTime" style="display: none;">Start Rep Time</button>
+        <button type="button" id="startRestPeriod" style="display: none;">Start Rest</button>
+
+
+        <label for="sets">Number of Sets:</label>
+        <input type="number" id="sets" name="sets">
+
+        <label for="rpe">RPE:</label>
+        <select id="rpe" name="rpe">
+            <!-- Numbers 1-10 -->
+        </select>
+
+        <div class="timer-display" id="timerDisplay">00:00:00</div>
+
+        <button type="button" id="begin">BEGIN</button>
+      
+
+        <div class="buttons-container">
+            <button type="button" id="rest" style="display:none;">REST</button>
+            <button type="button" id="end" style="display:none;">END</button>
+            <button type="button" id="nextSet" style="display:none;">Next Set</button>
+          </div>
+
+
+
+    </form>
+</div>
+
+<div id="repTimeDisplay">00:00:00</div>
+<div id="restPeriodDisplay">00:00:00</div>
+
+<div id="setInfoDisplay" style="display:none;">
+
+    <button type="button" id="rest">REST</button>
+    <button type="button" id="end">END</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
