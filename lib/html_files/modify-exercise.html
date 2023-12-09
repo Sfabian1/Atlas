@@ -1,0 +1,241 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas Shrugged</title>
+    <style>
+        body {
+            background-color: beige;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"],
+        .action-button {
+            width: 48%; /* Adjust width as needed */
+            padding: 10px;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            display: inline-block;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            background-color: #ff4040;
+        }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+
+        .update-button {
+            background-color: #ffa500;
+        }
+
+        .update-button:hover {
+            background-color: #e68a00;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Atlas Shrugged</h1>
+      <h2>Modify Exercise</h2>
+
+    <form action="#" method="post" onsubmit="submitForm(event)">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="Exercise Name" required value="1">
+
+        <label for="dropdown1">Force</label>
+        <select id="dropdown1" name="Force">
+            <option value="push" selected>push</option>
+            <option value="pull">pull</option>
+        </select>
+
+        <label for="dropdown2">Target Muscle Group</label>
+        <select id="dropdown2" name="Target Muscle Group" required>
+            <option value="abdominals" selected>Abdominals</option>
+            <option value="biceps">Biceps</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <label for="dropdown3">Progression</label>
+        <select id="dropdown3" name="Progression" required>
+            <option value="weight">Weight</option>
+            <option value="reps" selected>Reps</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <label for="minutes">Minutes:</label>
+        <input type="number" id="minutes" name="minutes" min="0" placeholder="0" required value="2">
+
+        <label for="seconds">Seconds:</label>
+        <input type="number" id="seconds" name="seconds" min="0" max="59" placeholder="0" required value="3">
+
+        <label for="dropdown4">Interval Metric</label>
+        <select id="dropdown4" name="dropdown4" required>
+            <option value="strength" selected>Strength</option>
+            <option value="power">Power</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <label for="textbox3">Link(Optional)</label>
+        <input type="text" id="textbox3" name="Link" value="4">
+
+        <div>
+            <button type="button" class="action-button delete-button" onclick="deleteExercise()">Delete</button>
+            <button type="button" class="action-button update-button" onclick="updateExercise()">Update</button>
+        </div>
+
+    </form>
+
+    <script>
+        const USER_ID_KEY = "userId";
+        const EXERCISE_ID_KEY = "exerciseId";
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('http://localhost:8000/'+getIdFromCache(USER_ID_KEY)+'/exercise/'+getIdFromCache(EXERCISE_ID_KEY),{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('GET Request Success:', data);
+                const defaultValues = data[0];
+
+        // Set default values in the form
+        document.getElementById('name').value = defaultValues.name;
+        document.getElementById('dropdown1').value = defaultValues.forces;
+        document.getElementById('dropdown2').value = defaultValues.target_muscle_group;
+        document.getElementById('dropdown3').value = defaultValues.progression;
+        document.getElementById('minutes').value = defaultValues.rest_interval.split(':')[0];
+        document.getElementById('seconds').value = defaultValues.rest_interval.split(':')[1];
+        document.getElementById('dropdown4').value = defaultValues.rest_interval_metric;
+        document.getElementById('textbox3').value = defaultValues.link;
+            })
+            .catch(error => {
+                console.error('GET Request Error:', error);
+            });
+            
+        });
+
+        function deleteExercise() {
+           fetch('http://localhost:8000/'+getIdFromCache(USER_ID_KEY)+'/exercise/'+getIdFromCache(EXERCISE_ID_KEY), {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Exercise Deleted");
+                
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            window.location.href = 'list-exercises.html';
+        }
+
+        function updateExercise() {
+            const exerciseName = document.getElementById('name').value;
+            const force = document.getElementById('dropdown1').value;
+            const targetMuscleGroup = document.getElementById('dropdown2').value;
+            const progression = document.getElementById('dropdown3').value;
+            const minutes = document.getElementById('minutes').value;
+            const seconds = document.getElementById('seconds').value;
+            const intervalMetric = document.getElementById('dropdown4').value;
+            const link = document.getElementById('textbox3').value;
+
+            // Construct the update object
+            const updatedExercise = {
+                "name": exerciseName,
+                "forces": force,
+                "target_muscle_group": targetMuscleGroup,
+                "progression": progression,
+                "rest_interval": `${minutes}:${seconds}`,
+                "rest_interval_metric": intervalMetric,
+                "link": link
+            };
+           fetch('http://localhost:8000/'+getIdFromCache(USER_ID_KEY)+'/exercise/'+getIdFromCache(EXERCISE_ID_KEY), {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedExercise)
+            })
+            .then(data => {
+                  console.log(getIdFromCache(EXERCISE_ID_KEY));
+                  window.location.href = 'list-exercises.html';
+            })
+            .catch(error => {
+                console.log(error);
+                console.error('Error:', error);
+            });
+            console.log('Exercise Updated');
+        }
+
+         function setIdInCache(idKey, number) {
+            localStorage.setItem(idKey, number);
+        }
+
+        // Function to get the number from the web cache
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
+        // Function to clear the web cache
+        function clearCache(idKey) {
+            localStorage.removeItem(idKey);
+        }
+    </script>
+
+</body>
+</html>

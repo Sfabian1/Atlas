@@ -1,0 +1,115 @@
+<!-- new_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <style>
+        body {
+            background-color: beige;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #exerciseList {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .exerciseItem {
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exercises</h1>
+    
+
+    <ul id="exerciseList"></ul>
+
+    <script>
+        const USER_ID_KEY = "userId";
+        const EXERCISE_ID_KEY = "exerciseId";
+        // Perform a GET request when the new page loads
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('http://localhost:8000/'+getIdFromCache(USER_ID_KEY)+'/exercise',{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('GET Request Success:', data);
+                displayExercises(data);
+            })
+            .catch(error => {
+                console.error('GET Request Error:', error);
+            });
+            
+        });
+
+       function displayExercises(exercises) {
+            const exerciseListContainer = document.getElementById('exerciseList');
+
+            exercises.forEach(exercise => {
+                const exerciseContainer = document.createElement('div');
+                exerciseContainer.className = 'exerciseContainer';
+
+                const exerciseList = document.createElement('ul');
+                exerciseList.className = 'exerciseItem';
+
+                for (const [key, value] of Object.entries(exercise)) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${key}: ${value}`;
+                    exerciseList.appendChild(listItem);
+                }
+
+                exerciseContainer.appendChild(exerciseList);
+                exerciseListContainer.appendChild(exerciseContainer);
+
+                // Add click event listener to each exercise container
+                exerciseContainer.addEventListener('click', function() {
+                    handleExerciseClick(exercise.exerciseID);
+                });
+            });
+        }
+
+         function handleExerciseClick(exerciseID) {
+            setIdInCache(EXERCISE_ID_KEY, exerciseID);
+            window.location.href = 'modify-exercise.html';
+            // You can perform additional actions here with the exerciseID
+        }
+
+
+        function setIdInCache(idKey, number) {
+            localStorage.setItem(idKey, number);
+        }
+
+        // Function to get the number from the web cache
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
+        // Function to clear the web cache
+        function clearCache(idKey) {
+            localStorage.removeItem(idKey);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas Shrugged</title>
+    <style>
+        body {
+            background-color: beige;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Atlas Shrugged</h1>
+
+     <form action="#" method="post" onsubmit="submitForm(event)">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="Exercise Name" required>
+
+        <label for="">Force</label>
+        <select id="dropdown1" name="Force">
+            <option value="push">push</option>
+            <option value="pull">pull</option>
+        </select>
+
+        <label for="dropdown2">Target Muscle Group</label>
+        <select id="dropdown2" name="Target Muscle Group" required>
+            <option value="abdominals">Abdominals</option>
+            <option value="biceps">Biceps</option>
+            <option value="calves">Calves</option>
+            <option value="chest">Chest</option>
+            <option value="forearm">Forearm</option>
+            <option value="glutes">Glutes</option>
+            <option value="grip">Grip</option>
+            <option value="hamstrings">Hamstrings</option>
+            <option value="hips">Hips</option>
+            <option value="lats">Lats</option>
+            <option value="lower_back">Lower Back</option>
+            <option value="middle_back">Middle Back</option>
+            <option value="neck">Neck</option>
+            <option value="quadriceps">Quadriceps</option>
+            <option value="shoulders">Shoulders</option>
+            <option value="triceps">Triceps</option>
+        </select>
+
+        <label for="dropdown3">Progression</label>
+        <select id="dropdown3" name="Progression" required>
+            <option value="weight">Weight</option>
+            <option value="reps">Reps</option>
+            <option value="time">Time</option>
+            <option value="distance">Distance</option>
+        </select>
+
+            <label for="minutes">Minutes:</label>
+            <input type="number" id="minutes" name="minutes" min="0" placeholder="0" required>
+
+            <label for="seconds">Seconds:</label>
+            <input type="number" id="seconds" name="seconds" min="0" max="59" placeholder="0" required>
+
+
+        <label for="dropdown4">Interval Metric</label>
+        <select id="dropdown4" name="dropdown4" required>
+            <option value="strength">Strength</option>
+            <option value="power">Power</option>
+            <option value="hypertrophy">Hypertrophy</option>
+            <option value="rehabilitation">Rehabilitation</option>
+            <option value="endurance">Endurance</option>
+        </select>
+
+        <label for="textbox3">Link(Optional)</label>
+        <input type="text" id="textbox3" name="Link">
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+    <script>
+        const USER_ID_KEY = "userId";
+        const EXERCISE_ID_KEY = "exerciseId";
+        setIdInCache(USER_ID_KEY, 12345678901234567);
+        function submitForm(event) {
+                event.preventDefault();
+                var exerciseName = document.getElementById('name').value;
+                var force = document.getElementById('dropdown1').value;
+                var targetMuscleGroup = document.getElementById('dropdown2').value;
+                var progression = document.getElementById('dropdown3').value;
+                var minutes = document.getElementById('minutes').value;
+                var seconds = document.getElementById('seconds').value;
+                var intervalMetric = document.getElementById('dropdown4').value;
+                var link = document.getElementById('textbox3').value;
+
+            var duration = `${minutes}:${seconds}`;
+            var formData = {
+                "name": exerciseName,
+                "forces": force,
+                "target_muscle_group": targetMuscleGroup,
+                "progression": progression,
+                "rest_interval": duration,
+                "rest_interval_metric": intervalMetric,
+                "link": link
+            };
+
+            // Send a POST request using the Fetch API
+            fetch('http://localhost:8000/'+getIdFromCache(USER_ID_KEY)+'/exercise', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                 setIdInCache(EXERCISE_ID_KEY, data);
+                  console.log(getIdFromCache(EXERCISE_ID_KEY));
+                  window.location.href = 'list-exercises.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+           
+        }
+
+        function setIdInCache(idKey, number) {
+            localStorage.setItem(idKey, number);
+        }
+
+        // Function to get the number from the web cache
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
+        // Function to clear the web cache
+        function clearCache(idKey) {
+            localStorage.removeItem(idKey);
+        }
+
+
+   
+    </script>
+
+</body>
+</html>
