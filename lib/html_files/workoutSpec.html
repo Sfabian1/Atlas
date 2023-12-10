@@ -125,29 +125,34 @@
     <button class="save-btn" onclick="deleteWorkout()" style="background-color: #ff6347; margin-top: 10px;">Delete</button> 
   </div>
   <script>
+    const USER_ID_KEY = "userID";
+    const WORKOUT_ID_KEY = "workoutID";
 
     function formatDate(isoString) {
     return isoString.split('T')[0];
     }
 
     function goBack() {
-        const userID = getUserIDFromURL();
-        window.location.href = 'workoutViewer.html?userID=' + userID;
+        window.location.href = 'workoutViewer.html';
     }
 
-    function getWorkoutIDFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('workoutID');
+    function setIdInCache(idKey, number) {
+        localStorage.setItem(idKey, number);
     }
 
-    function getUserIDFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        console.log(urlParams.get('userID'));
-        return urlParams.get('userID');
+    // Function to get the number from the web cache
+    function getIdFromCache(idKey) {
+        return parseInt(localStorage.getItem(idKey)) || 0;
     }
 
-    function fetchWorkoutDetails(workoutID) {
-        const userID = getUserIDFromURL();
+    // Function to clear the web cache
+    function clearCache(idKey) {
+        localStorage.removeItem(idKey);
+    }
+
+    function fetchWorkoutDetails() {
+        const userID = getIdFromCache(USER_ID_KEY)
+        const workoutID = getIdFromCache(WORKOUT_ID_KEY);
         fetch('http://localhost:8000/' + userID + '/workouts/' + workoutID, {
             method: 'GET',
             headers: {
@@ -178,8 +183,8 @@
     }
 
     function saveWorkout() {
-        const userID = getUserIDFromURL();
-        const workoutID = getWorkoutIDFromURL();
+        const userID = getIdFromCache(USER_ID_KEY); // Use the user ID from cache
+        const workoutID = getIdFromCache(WORKOUT_ID_KEY); // Use the workout ID from cache
         if (!workoutID) {
             alert('Workout ID is missing.');
             return;
@@ -217,8 +222,9 @@
     }
 
     function deleteWorkout() {
-        const userID = getUserIDFromURL();
-        const workoutID = getWorkoutIDFromURL();
+        const userID = getIdFromCache(USER_ID_KEY); // Use the user ID from cache
+        const workoutID = getIdFromCache(WORKOUT_ID_KEY); // Use the workout ID from cache
+
         if (!workoutID) {
         alert('Workout ID is missing.');
         return;
@@ -251,10 +257,7 @@
     }
 
     window.onload = function() {
-        const workoutID = getWorkoutIDFromURL();
-        if (workoutID) {
-        fetchWorkoutDetails(workoutID);
-        }
+        fetchWorkoutDetails();
     };
   </script>
 </body>

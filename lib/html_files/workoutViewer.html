@@ -58,10 +58,12 @@
   #workoutListContainer + button:hover {
     background-color: #45a049;
   }
+
+  
 </style>
 </head>
 <body>
-
+  <button onclick="returntoHomePage()">Return to Home Page</button>
 <h2 id="workoutListHeader">List of Workouts</h2>
 
 <div id="workoutListContainer">
@@ -70,7 +72,11 @@
 <button id="createWorkoutButton">Create</button>
 
 <script>
-const workoutsJson = `[{"name":"Workout A","date":"2023-04-01","status":"IN_PROGRESS"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"}]`;
+  const USER_ID_KEY = "userID";
+  const WORKOUT_ID_KEY = "workoutID";
+  setIdInCache(USER_ID_KEY, 69);
+
+  const workoutsJson = `[{"name":"Workout A","date":"2023-04-01","status":"IN_PROGRESS"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"},{"name":"Workout B","date":"2023-04-02","status":"COMPLETED"}]`;
 
   function formatDate(isoString) {
     return isoString.split('T')[0];
@@ -86,7 +92,8 @@ const workoutsJson = `[{"name":"Workout A","date":"2023-04-01","status":"IN_PROG
     button.type = 'button';
     button.className = 'workoutItem';
     button.onclick = function() {
-      window.location.href = 'workoutSpec.html?workoutID=' + workout.workoutID + '&userID=' + workout.userID;
+      setIdInCache(WORKOUT_ID_KEY, workout.workoutID);
+      window.location.href = 'workoutSpec.html';
     };
 
     button.innerHTML = `
@@ -100,6 +107,7 @@ const workoutsJson = `[{"name":"Workout A","date":"2023-04-01","status":"IN_PROG
   }
 
   function fetchWorkouts(userID) {
+    console.log('http://localhost:8000/' + userID + '/workouts');
     fetch('http://localhost:8000/' + userID + '/workouts', {
       method: 'GET',
       headers: {
@@ -120,18 +128,38 @@ const workoutsJson = `[{"name":"Workout A","date":"2023-04-01","status":"IN_PROG
     });
   }
 
-  function getUserIDFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('userID');
+  // Function to set the number in the web cache
+  function setIdInCache(idKey, number) {
+    localStorage.setItem(idKey, number);
+  }
+
+  // Function to get the number from the web cache
+  function getIdFromCache(idKey) {
+    return parseInt(localStorage.getItem(idKey)) || 0;
+  }
+
+  // Function to clear the web cache
+  function clearCache(idKey) {
+    localStorage.removeItem(idKey);
   }
 
   window.onload = function() {
-    const userID = 69; // REPLACE HERE
+    setIdInCache()
+    const userID = getIdFromCache("userID");
+    if (!userID) {
+      console.error("User ID not found in cache");
+      return;
+    }
     fetchWorkouts(userID);
     document.getElementById('createWorkoutButton').addEventListener('click', function() {
-    window.location.href = 'createWorkout.html?userID=' + userID;
+    window.location.href = 'createWorkout.html';
     });
   };
+
+  function returntoHomePage(){
+            window.location.href = 'homePage.html';
+
+        }
 
 </script>
 
