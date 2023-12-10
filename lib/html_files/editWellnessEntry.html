@@ -122,10 +122,8 @@
   </div>
 
   <script>
- function getWellnessIDFromURL() {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get('wellnessID');
-    }    
+        const USER_ID_KEY = "userId";
+        const WELLNESS_ID_KEY = "wellnessId";
     
     window.onload = async function () {
     const editForm = document.getElementById('editForm');
@@ -136,17 +134,11 @@
         event.preventDefault();
 
         // Your existing logic to fetch and populate data goes here
-        const userID = getUserIDFromURL();
-        const wellnessID = getWellnessIDFromURL();
-
-        if (!wellnessID) {
-            console.error('Wellness ID is missing.');
-            return;
-        }
+        
 
         try {
             // Fetch the original wellness entry data
-            const response = await fetch(`http://localhost:8000/${userID}/wellness/${wellnessID}`, {
+            const response = await fetch('http://localhost:8000/'+getIdFromCache(USER_ID_KEY)+'/wellness/'+getIdFromCache(WELLNESS_ID_KEY), {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -176,8 +168,7 @@
 };
 
     function saveChanges() {
-      const userID = 17857858699144792;
-      const wellnessID = getWellnessIDFromURL(); // Implement the getWellnessIDFromURL function
+     
       const editForm = document.getElementById('editForm');
 
       // Collect the updated data from the form
@@ -192,7 +183,7 @@
       };
 
       // Send the updated data to the server
-      fetch(`http://localhost:8000/${userID}/wellness/${wellnessID}`, {
+      fetch('http://localhost:8000/'+getIdFromCache(USER_ID_KEY)+'/wellness/'+getIdFromCache(WELLNESS_ID_KEY), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -208,7 +199,8 @@
         .then(data => {
           console.log('Changes saved successfully:', data);
           alert('Changes saved successfully ');
-          window.location.href = 'wellnessHistory.html?userID=' + userID;
+
+          window.location.href = 'wellnessHistory.html';
 
         })
         .catch(error => {
@@ -217,6 +209,21 @@
 
         });
     }
+
+
+    function setIdInCache(idKey, number) {
+            localStorage.setItem(idKey, number);
+        }
+
+        // Function to get the number from the web cache
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
+        // Function to clear the web cache
+        function clearCache(idKey) {
+            localStorage.removeItem(idKey);
+        }
   </script>
 </body>
 </html>
