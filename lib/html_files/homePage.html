@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Hub</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('atlasLogHeader.jpg') center/cover no-repeat fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        header, footer {
+            background: rgba(44, 62, 80, 0.8);
+            color: #ecf0f1;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        header img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ecf0f1;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background: #34495e;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            max-width: 80px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .title,
+        .subtitle {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #2980b9, #34495e);
+            transform: scale(1.05);
+        }
+
+        .input-workout-button {
+            background: linear-gradient(to right, #e67e22, #d35400);
+        }
+
+        .wellness-button {
+            background: linear-gradient(to right, #27ae60, #2ecc71);
+        }
+
+        .exercise-container,
+        .contact-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            padding: 30px; /* Increase padding for larger box */
+            max-width: 400px; /* Increase max-width for larger box */
+            margin: 10px;
+        }
+
+        .contact-form,
+        .exercise-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+    display: block;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Center the text inside the button */
+    margin: auto; /* Center the block element horizontally */
+}
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="#input-workout">Input Workout</a>
+            <a href="#wellness">Wellness</a>
+            <a href="#create-exercise">Create Exercise</a>
+            <a href="#list-exercises">List Exercises</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <div class="container" id="input-workout">
+        <img src="dumbellicon.png" alt="Fitness Hub Logo" class="logo">
+        <div class="title">Input Your Workouts!</div>
+        <div class="subtitle">Track your workouts and progress with our input workout feature.</div>
+        <div class="cta-buttons">
+            <a href="#" class="button input-workout-button" onclick="inputWorkout()">Input Workout</a>
+        </div>
+    </div>
+    <div class="container" id="wellness">
+        <img src="wellness icon.png" alt="Fitness Hub Logo" class="logo">
+        <div class="title">Wellness </div>
+        <div class="subtitle">Track Your Wellness with Ease.</div>
+        <div class="cta-buttons">
+            <a href="#" class="button wellness-button" onclick="exploreWellness()">Explore</a>
+            
+        </div>
+    </div>
+    <div class="container exercise-container" id="create-exercise">
+        <div class="title">Create Exercise</div>
+        <div class="subtitle">Add a new exercise to your routine.</div>
+        <div class="exercise-details">
+            <!-- Add details for creating exercise if needed -->
+        </div>
+        <div class="cta-buttons">
+            <a href="#" class="button input-workout-button" onclick="createExercise()">Create Exercise</a>
+        </div>
+    </div>
+    <div class="container exercise-container" id="list-exercises">
+        <div class="title">List Exercises</div>
+        <div class="subtitle">View your exercise list</div>
+        <div class="exercise-details">
+            <!-- Add details for listing exercises if needed -->
+        </div>
+        <div class="cta-buttons">
+            <a href="#" class="button wellness-button" onclick="listExercises()">List Exercises</a>
+        </div>
+    </div>
+    <div class="container contact-container" id="contact">
+        <div class="subtitle">Reach us at IloveSoftwareEngineering@gmail.com</div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Atlas Shrugged. All rights reserved.</p>
+    </footer>
+    <script>
+        const USER_ID_KEY = "userId";
+    const WELLNESS_ID_KEY = "wellnessId";
+    setIdInCache(USER_ID_KEY, 12345678901234567);
+        function inputWorkout() {
+            console.log('Input Workout button clicked!');
+            window.location.href = 'createWorkout.html';
+
+
+        }
+
+        function exploreWellness() {
+            console.log('Wellness button clicked!');
+            window.location.href = 'wellnessHomeScreen.html';
+
+        }
+
+        function createExercise() {
+            console.log('Create Exercise button clicked!');
+            window.location.href = 'create-exercise.html';
+
+        }
+
+        function listExercises() {
+            console.log('List Exercises button clicked!');
+            window.location.href = 'list-exercises.html';
+
+
+        }
+
+        function setIdInCache(idKey, number) {
+            localStorage.setItem(idKey, number);
+        }
+
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
+        function clearCache(idKey) {
+            localStorage.removeItem(idKey);
+        }
+
+    </script>
+</body>
+
+</html>

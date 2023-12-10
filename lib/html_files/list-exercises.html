@@ -31,12 +31,30 @@
             padding: 10px;
             background-color: #fff;
         }
+        button {
+    display: block;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Center the text inside the button */
+    margin: auto; /* Center the block element horizontally */
+}
+
+        button:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
 
     <h1>Exercises</h1>
     
+    <button onclick="returntoHomePage()">Return to Home Page</button>
 
     <ul id="exerciseList"></ul>
 
@@ -108,6 +126,10 @@
         // Function to clear the web cache
         function clearCache(idKey) {
             localStorage.removeItem(idKey);
+        }
+
+        function returntoHomePage(){
+            window.location.href = 'homePage.html';
         }
     </script>
 
