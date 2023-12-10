@@ -76,11 +76,30 @@
     .back-btn:hover {
         background-color: #5a6268;
     }
+    button {
+    display: block;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Center the text inside the button */
+    margin: auto; /* Center the block element horizontally */
+}
+
+        button:hover {
+            background-color: #2980b9;
+        }
 </style>
 </head>
 <body>
 
 <div class="workout-form">
+    <button onclick="returntoHomePage()">Return to Home Page</button>
+
     <button class="back-btn" onclick="goBack()">Back</button>
   <h2>Workout Information</h2>
   <form id="workoutForm">
@@ -192,6 +211,11 @@
         setCurrentDateAndTime();
         document.getElementById('workoutForm').addEventListener('submit', createWorkout);
     };
+
+    function returntoHomePage(){
+            window.location.href = 'homePage.html';
+
+        }
   
 </script>
 

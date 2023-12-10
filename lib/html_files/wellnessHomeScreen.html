@@ -108,7 +108,7 @@
         <div class="nav-container">
             <a href="#home">Submit Your Wellness Data</a>
             <a href="#features">View Wellness History</a>
-            <a href="#contact">Contact</a>
+            <a href="homePage.html">Return to Home</a>
 
         </div>
     </nav>
@@ -117,10 +117,10 @@
         <div class="home-container">
             <h2>Input Your Own Wellness Data</h2>
             <p>Track how you feel about your workouts</p>
-            <img src="fitness-app-image.jpg" alt="Fitness App Image">
+            <div style="text-align: center;">
+                <img src="fitness-app-image.jpg" alt="Fitness App Image">
+            </div>
             <button type="button" onclick="returnToSubmit()">Submit Your Wellness Data Now</button>
-
-            
         </div>
     </section>
 
@@ -133,31 +133,18 @@
         </div>
     </section>
 
-    <section id="contact">
-        <div class="contact-container">
-            <h2>Get in Touch</h2>
-            <p>Contact IDefinitelyLoveSoftwareENG@gmail.com</p>
-        </div>
-    </section>
-
     <script>
-     function getUserIDFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('userID');
-    }
+    
 
      function returnToSubmit() {
-     const  userID = getUserIDFromURL();
       window.location.href = 'submitWellness.html';
     }
 
     function viewWellnessHistory() {
-        const  userID = getUserIDFromURL();
       window.location.href = 'wellnessHistory.html';
     }
 
     window.onload = function() {
-        const userID = 17857858699144792; // REPLACE HERE
     };
 
 
