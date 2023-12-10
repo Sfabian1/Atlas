@@ -183,24 +183,16 @@
   </div>
 
   <script>
-    function getUserIDFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('userID');
-    }
+    const USER_ID_KEY = "userId";
+    const WELLNESS_ID_KEY = "wellnessId";
+    setIdInCache(USER_ID_KEY, 12345678901234567);
+    
     function submitDropdown(category) {
       const selectedValue = document.getElementById(`${category}Dropdown`).value;
       console.log(`Category: ${category}, Value: ${selectedValue}`);
     }
-    function returnToSubmitFOrm() {
-        const userID = getUserIDFromURL();
-        window.location.href = 'wellnessHomeScreen.html?userID=' + userID;
-    }
-
     function submitForm() {
-      const userID = getUserIDFromURL();
-
       const wellnessDataSubmitted = {
-      userID: userID,
       date: document.getElementById("dateInput").value,
        mood: document.getElementById("moodDropdown").value,
        stress: document.getElementById("stressDropdown").value,
@@ -210,7 +202,7 @@
        soreness: document.getElementById("sorenessDropdown").value
       }
 
-      fetch('http://localhost:8000/' + userID + '/wellness', {
+      fetch('http://localhost:8000/' + getIdFromCache(USER_ID_KEY) + '/wellness', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -223,17 +215,34 @@
 
                 throw new Error('Network response was not ok');
             }
+            alert("Your Wellness Data has been inputed!! ")
             return response.text();
         })
         .then(data => {
-            alert('Response from server: ' + data);
-            window.location.href = 'wellnessHistory.html?userID=' + userID;
+          
+          
+            setIdInCache(WELLNESS_ID_KEY, data);
+            console.log("wellness id :" + getIdFromCache(WELLNESS_ID_KEY));
+            window.location.href = 'wellnessHistory.html';
         })
         .catch(error => {
             console.error('Error saving Wellness Data Input:', error);
-            alert('Error saving Wellness Data Input: ' + error);
+            alert('Error inputing Wellness Data Input: ' + error);
         });
     }
+    function setIdInCache(idKey, number) {
+            localStorage.setItem(idKey, number);
+        }
+
+        // Function to get the number from the web cache
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
+        // Function to clear the web cache
+        function clearCache(idKey) {
+            localStorage.removeItem(idKey);
+        }
   </script>
   
     

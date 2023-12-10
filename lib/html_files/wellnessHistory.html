@@ -120,16 +120,32 @@
   </style>
 
   <script>
-    function getWellnessIDFromURL() {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get('wellnessID');
-    }
+    const USER_ID_KEY = "userId";
+    const WELLNESS_ID_KEY = "wellnessId";
 
-    function getUserIDFromURL() {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get('userID');
-    }
-
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('http://localhost:8000/' + getIdFromCache(USER_ID_KEY) + '/wellness', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => {
+          console.log("Response received:", response);
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("Wellness data:", data);
+          displayWellness(data);
+        })
+        .catch(error => {
+          console.error('There has been a problem with deleting/fetching wellness data:', error);
+        });
+      });
+      
     function displayWellness(wellness) {
       const tableBody = document.getElementById('wellnessTableBody');
       tableBody.innerHTML = '';
@@ -150,24 +166,25 @@
             <td>${entry.sleep}</td>
             <td>${entry.soreness}</td>
             <td>
-                <button class="delete-button" onclick="deleteWellnessEntry(${entry.wellness_id})">&#128465; Delete</button>
+                <button class="delete-button" onclick="deleteWellnessEntry()">&#128465; Delete</button>
                 <button class="edit-button" onclick="editWellnessEntry(${entry.wellness_id})">&#9998; Edit</button>
             </td>
         `;
         tableBody.appendChild(row);
+        tableBody.addEventListener('mouseover', function(){
+          handleExerciseClick(entry.wellness_id);
+        })
       });
     }
 
-    function deleteWellnessEntry(wellnessID) {
-      const userID = 17857858699144792;
-      console.log(`Deleting entry with ID ${wellnessID}`);
-      if (!wellnessID) {
-        alert('Wellness ID is missing.');
-        return;
-      }
+    function deleteWellnessEntry() {
+      const userID = getIdFromCache(USER_ID_KEY);
+    const wellnessID = getIdFromCache(WELLNESS_ID_KEY);      
+    console.log(getIdFromCache(WELLNESS_ID_KEY));
       if (!confirm('Are you sure you want to delete this wellness entry?')) {
         return;
       }
+      
       fetch('http://localhost:8000/' + userID + '/wellness/' + wellnessID, {
         method: 'DELETE',
         headers: {
@@ -183,46 +200,22 @@
         })
         .then(data => {
           console.log("Response from server:" + data);
-          fetchWellness(userID);
+          window.location.href = 'wellnessHistory.html';
         })
         .catch(error => {
           console.error('There has been a problem with your fetch operation:', error);
         });
     }
+  
 
     function editWellnessEntry(wellnessID) {
-      const userID = 17857858699144792;
-      window.location.href = `editWellnessEntry.html?userID=${userID}&wellnessID=${wellnessID}`;
+      window.location.href = `editWellnessEntry.html`;
     }
 
-    function fetchWellness(userID) {
-      console.log("Fetching wellness data...");
-      fetch('http://localhost:8000/' + userID + '/wellness', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => {
-          console.log("Response received:", response);
-          if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log("Wellness data:", data);
-          displayWellness(data);
-        })
-        .catch(error => {
-          console.error('There has been a problem with deleting/fetching wellness data:', error);
-        });
-    }
 
-    window.onload = function() {
-      const userID = 17857858699144792;
-      fetchWellness(userID);
-    };
+    
+
+
   </script>
 </head>
 
@@ -259,14 +252,30 @@
 
   <script>
     function returnToSubmit() {
-      const userID = getUserIDFromURL();
       window.location.href = 'submitWellness.html';
     }
 
     function returnToWellnessHomeScreen() {
-      const userID = getUserIDFromURL();
       window.location.href = 'wellnessHomeScreen.html';
     }
+
+    function setIdInCache(idKey, number) {
+            localStorage.setItem(idKey, number);
+        }
+
+        function handleExerciseClick(wellnessID) {
+            setIdInCache(WELLNESS_ID_KEY, wellnessID);
+            
+        }
+        // Function to get the number from the web cache
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
+        // Function to clear the web cache
+        function clearCache(idKey) {
+            localStorage.removeItem(idKey);
+        }
   </script>
 </body>
 </html>
