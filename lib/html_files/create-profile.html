@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile - Atlas Shrugged</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://media1.thehungryjpeg.com/thumbs2/ori_4252464_5jgx3mehs9sklpj8kmyhmbd2y8yzhazmnziw0ct2_darling-handwritten-font.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        
+        header {
+              background-color: #BA7A58;
+              color: white;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              z-index: 1000;
+              padding: 10px 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+                margin: 0;
+                font-size: 24px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+              color: #ffd700;
+        }
+
+        #create-profile-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        width: 100%;
+        max-width: 400px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        margin: 120px auto;
+        }
+
+       #create-profile-form label,
+       #create-profile-form input,
+       #create-profile-form button {
+       width: 100%;
+       margin-top: 15px;
+       }
+
+       #create-profile-form input,
+       #create-profile-form button {
+       height: 40px;
+       padding: 0 15px;
+       border: 1px solid #ddd;
+       border-radius: 4px;
+       }
+
+       #create-profile-form button {
+       background-color: #007bff;
+       color: white;
+       border: none;
+       cursor: pointer;
+       font-weight: bold;
+       margin-top: 25px;
+       }
+
+       #create-profile-form button:hover {
+       background-color: #0056b3;
+       }
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Atlas Shrugged</h1>
+    </header>
+    <div id="create-profile-container">
+        <h2>Create Your Profile</h2>
+        <form id="create-profile-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br>
+
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" name="height" required><br>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" required><br>
+
+            <div>BMI: <span id="bmi"></span></div>
+
+            <button type="submit">Create Profile</button>
+        </form>
+    </div>
+    <script>
+        
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const bmiSpan = document.getElementById('bmi');
+
+            if (!isNaN(height) && !isNaN(weight) && height > 0 && weight > 0) {
+                const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+                bmiSpan.textContent = bmi;
+            } else {
+                bmiSpan.textContent = 'N/A';
+            }
+            }
+        document.getElementById('height').addEventListener('input', calculateBMI);
+        document.getElementById('weight').addEventListener('input', calculateBMI);
+
+        calculateBMI();
+
+        const USER_ID_KEY = "userId";
+        const PROFILE_ID_KEY = "profileId";
+    
+        function submitProfile(event) {
+            event.preventDefault(); 
+            var username = document.getElementById('username').value;
+            var age = document.getElementById('age').value;
+            var height = document.getElementById('height').value;
+            var weight = document.getElementById('weight').value;
+
+         var profileData = {
+           "username": username,
+           "age": age,
+           "height": height,
+           "weight": weight
+         };
+
+      
+        fetch('http://localhost:8000/' + getIdFromCache(USER_ID_KEY) + '/profile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(profileData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setIdInCache(PROFILE_ID_KEY, data);
+            console.log(getIdFromCache(PROFILE_ID_KEY));
+        })
+        .catch(error => {
+            console.error('Error creating profile:', error);
+        });
+        }
+
+        function setIdInCache(idKey, number) {
+            localStorage.setItem(idKey, number);
+        }
+
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
+        function clearCache(idKey) {
+            localStorage.removeItem(idKey);
+        }
+
+
+        document.getElementById('create-profile-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            submitProfile(event);
+        });
+        
+    </script>
+</body>
+</html>

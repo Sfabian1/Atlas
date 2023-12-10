@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Atlas Shrugged</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://media1.thehungryjpeg.com/thumbs2/ori_4252464_5jgx3mehs9sklpj8kmyhmbd2y8yzhazmnziw0ct2_darling-handwritten-font.jpg');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 10px;
+            text-align: left;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .profile-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background: bisque;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        .profile-container h2 {
+            text-align: center; 
+            color: #333;
+            margin: 0 0 20px 0;
+
+        }
+        .profile-stat {
+            margin: 15px ;
+        }
+        #createModifyProfileBtn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Atlas Shrugged</h1>
+    </header>
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <div class="profile-stat">Name: <span id="username"></span></div>
+        <div class="profile-stat">Age: <span id="age"></span></div>
+        <div class="profile-stat">Height: <span id="height"></span> </div>
+        <div class="profile-stat">Weight: <span id="weight"></span> </div>
+        <div class="profile-stat">BMI: <span id="bmi"></span></div>
+        <button id="createModifyProfileBtn">Create Profile</button>
+    </div>
+
+    <script>
+
+        const USER_ID_KEY = "userId";
+        document.addEventListener('DOMContentLoaded', function() {
+        const userId = localStorage.getItem(USER_ID_KEY);
+
+        if (!userId) {
+            console.log("No user ID found. Redirecting to login page.");
+            window.location.href = 'login.html';
+        } else {
+            fetch('http://localhost:8000/' + userId + '/profile', { 
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(profile => {
+                console.log('GET Request Success:', profile);
+                displayProfile(profile);
+            })
+            .catch(error => {
+                console.error('GET Request Error:', error);
+            });
+        }
+
+        document.getElementById('createModifyProfileBtn').addEventListener('click', function() {
+            window.location.href = 'create-profile.html'; 
+        });
+    });
+    
+    function displayProfile(profile) {
+        document.getElementById('username').textContent = profile.username || 'N/A';
+        document.getElementById('age').textContent = profile.age || 'N/A';
+        document.getElementById('height').textContent = profile.height || 'N/A';
+        document.getElementById('weight').textContent = profile.weight || 'N/A';
+        document.getElementById('bmi').textContent = profile.bmi || 'N/A';
+    }
+
+   
+    function getIdFromCache(idKey) {
+        return parseInt(localStorage.getItem(idKey)) || 0;
+    }
+    
+    function clearCache(idKey) {
+        localStorage.removeItem(idKey);
+    }
+</script>
+</body>
+</html>
