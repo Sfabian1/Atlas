@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - Atlas Shrugged</title>
+    <title>Edit Profile - Atlas Shrugged</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -50,7 +50,21 @@
         .profile-stat {
             margin: 15px ;
         }
-        #createProfileBtn {
+        .edit-profile-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .edit-profile-form label {
+            margin-bottom: 5px;
+        }
+        .edit-profile-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        .edit-profile-btn {
             display: block;
             width: 100%;
             padding: 10px;
@@ -74,26 +88,47 @@
         </nav>
     </header>
     <div class="profile-container">
-        <h2>User Profile</h2>
+        <h2>Edit Profile</h2>
         <div class="profile-stat">Name: <span id="username"></span></div>
         <div class="profile-stat">Age: <span id="age"></span></div>
         <div class="profile-stat">Height: <span id="height"></span> </div>
         <div class="profile-stat">Weight: <span id="weight"></span> </div>
         <div class="profile-stat">BMI: <span id="bmi"></span></div>
-        <button id="createProfileBtn">Create Profile</button>
+
+
+        <form class="edit-profile-form" id="editProfileForm">
+            <label for="newName">Name:</label>
+            <input type="text" id="newName" name="newName">
+
+            <label for="newAge">Age:</label>
+            <input type="number" id="newAge" name="newAge">
+
+            <label for="newHeight">Height:</label>
+            <input type="number" id="newHeight" name="newHeight">
+
+            <label for="newWeight">Weight:</label>
+            <input type="number" id="newWeight" name="newWeight">
+
+            <label for="newBMI">BMI:</label>
+            <input type="text" id="newBMI" name="newBMI" disabled>
+
+            <button type="button" class="edit-profile-btn" onclick="updateProfile()">Update Profile</button>
     </div>
 
     <script>
-
         const USER_ID_KEY = "userId";
+        function getIdFromCache(idKey) {
+            return parseInt(localStorage.getItem(idKey)) || 0;
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-        const userId = localStorage.getItem(USER_ID_KEY);
+        const userId = getIdFromCache(USER_ID_KEY);
 
         if (!userId) {
             console.log("No user ID found. Redirecting to login page.");
-            window.location.href = 'login.html';
+            window.location.href = 'homePage.html';
         } else {
-            fetch('http://localhost:8000/' + userId + '/profile', { 
+            fetch('http://localhost:8000/' + userId + '/profiles', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -102,34 +137,99 @@
             .then(response => response.json())
             .then(profile => {
                 console.log('GET Request Success:', profile);
-                displayProfile(profile);
+
+                // Display default profile information
+                        // Display profile information
+                document.getElementById('username').textContent = profile.username || 'N/A';
+                document.getElementById('age').textContent = profile.age || 'N/A';
+                document.getElementById('height').textContent = profile.height || 'N/A';
+                document.getElementById('weight').textContent = profile.weight || 'N/A';
+                document.getElementById('bmi').textContent = profile.bmi || 'N/A';
+
+                // Pre-fill form values
+                document.getElementById('newName').value = profile.username || '';
+                document.getElementById('newAge').value = profile.age || '';
+                document.getElementById('newHeight').value = profile.height || '';
+                document.getElementById('newWeight').value = profile.weight || '';
+                document.getElementById('newBMI').value = profile.bmi || '';
+
             })
             .catch(error => {
                 console.error('GET Request Error:', error);
             });
         }
 
-        document.getElementById('createProfileBtn').addEventListener('click', function() {
-            window.location.href = 'create-profile.html'; 
+        document.getElementById('editProfileBtn').addEventListener('click', function() {
+            window.location.href = 'edit-profile.html';
         });
     });
-    
-    function displayProfile(profile) {
-        document.getElementById('username').textContent = profile.username || 'N/A';
-        document.getElementById('age').textContent = profile.age || 'N/A';
-        document.getElementById('height').textContent = profile.height || 'N/A';
-        document.getElementById('weight').textContent = profile.weight || 'N/A';
-        document.getElementById('bmi').textContent = profile.bmi || 'N/A';
-    }
 
-   
-    function getIdFromCache(idKey) {
-        return parseInt(localStorage.getItem(idKey)) || 0;
-    }
-    
-    function clearCache(idKey) {
-        localStorage.removeItem(idKey);
-    }
-</script>
+        // Update Profile function
+        function updateProfile() {
+            // Gather updated data from the form
+            const newName = document.getElementById('newName').value;
+            let newAge = parseInt(document.getElementById('newAge').value, 10);
+            let newHeight = parseInt(document.getElementById('newHeight').value, 10);
+            let newWeight = parseInt(document.getElementById('newWeight').value, 10);
+
+            // Client-side validation
+            if (isNaN(newAge) || newAge < 0) {
+                alert('Please enter a valid age.');
+                return;
+            }
+
+            if (isNaN(newHeight) || newHeight < 0) {
+                alert('Please enter a valid height.');
+                return;
+            }
+
+            if (isNaN(newWeight) || newWeight < 0) {
+                alert('Please enter a valid weight.');
+                return;
+            }
+
+            // Calculate BMI
+            const newBMI = calculateBMI(newWeight, newHeight);
+
+            // Create an object with the updated profile data
+            const updatedProfile = {
+                username: newName,
+                age: newAge,
+                height: newHeight,
+                weight: newWeight,
+                bmi: newBMI
+                // Additional fields if needed
+            };
+
+            // Send a PUT request to update the profile
+            fetch('chttp://localhost:8000/' + userId + '/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedProfile)
+            })
+            .then(response => response.json())
+            .then(updatedProfile => {
+                console.log('PUT Request Success:', updatedProfile);
+            })
+            .catch(error => {
+                console.error('PUT Request Error:', error);
+            });
+        }
+
+        // Function to calculate BMI
+        function calculateBMI(weight, height) {
+       
+            const heightInMeters = height / 100;
+
+      
+            const bmi = weight / (heightInMeters * heightInMeters);
+
+       
+            return bmi.toFixed(2);
+        }
+       
+    </script>
 </body>
 </html>

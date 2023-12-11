@@ -216,6 +216,13 @@
             <a href="#" class="button wellness-button" onclick="listExercises()">List Exercises</a>
         </div>
     </div>
+    <div class="container profile-container" id="get-profile">
+        <div class="title">Profile</div>
+        <div class="subtitle">View your Profile</div>
+        <div class="cta-buttons">
+            <a href="#" class="button profile-button" onclick="exploreProfile()">Profile</a>
+        </div>
+    </div>
     <div class="container contact-container" id="contact">
         <div class="subtitle">Reach us at IloveSoftwareEngineering@gmail.com</div>
     </div>
@@ -229,13 +236,17 @@
         function inputWorkout() {
             console.log('Input Workout button clicked!');
             window.location.href = 'createWorkout.html';
-
-
         }
 
         function exploreWellness() {
             console.log('Wellness button clicked!');
             window.location.href = 'wellnessHomeScreen.html';
+
+        }
+
+        function exploreProfile() {
+            console.log('Profile Button Clicked');
+            window.location.href = 'user-profile.html';
 
         }
 
