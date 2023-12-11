@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plot Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            transition: background-color 0.5s ease;
+            color: #000;
+            position: relative;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.5s ease;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #error-message {
+            color: #ff0000;
+            margin-top: 16px;
+        }
+
+        body.dark-mode {
+            background-color: #222;
+            color: #ffa500;
+        }
+
+        .container.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #title-and-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        #title {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        #logo {
+            width: 50px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+function generatePlot() {
+    const category = document.getElementById('category').value;
+    const metric = document.getElementById('metric').value;
+    const startDate = document.getElementById('startDate').value;
+    const numOfDays = document.getElementById('numOfDays').value;
+
+    const rawStartDate = startDate;
+    const startDateObject = new Date(rawStartDate);
+    const formattedStartDate = startDateObject.toISOString().split('T')[0];
+
+    const userID = '209467387598267588';
+    let url;
+
+    if (category === 'exercise') {
+        url = `http://localhost:8000/${userID}/plot?exerciseid=${exerciseID}&startDate=${formattedStartDate}&numOfDays=${numOfDays}`;
+    } else if (category === 'wellness') {
+        url = `http://localhost:8000/${userID}/plot?metric=${metric}&startDate=${formattedStartDate}&numOfDays=${numOfDays}`;
+    }
+
+    const errorMessageElement = document.getElementById('error-message');
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const timestamps = data.timestamps;
+        const values = data.values;
+
+        createPlot(timestamps, values);
+    })
+    .catch(error => {
+        errorMessageElement.textContent = 'Error: ' + error.message;
+    });
+}
+function createPlot(timestamps, data) {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const isExerciseData = data.hasOwnProperty('muscleGroups');
+
+    const getExerciseDataset = muscleGroup => ({
+        label: muscleGroup,
+        data: timestamps.map(date => data.muscleGroups[muscleGroup][date] || 0),
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        fill: false
+    });
+
+    const getWellnessDataset = metric => ({
+        label: metric,
+        data: timestamps.map(date => {
+            const value = data[metric][date] || 'normal';
+            return metricOrder[metric].indexOf(value);
+        }),
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        fill: false
+    });
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: timestamps,
+            datasets: isExerciseData
+                ? Object.keys(data.muscleGroups).map(getExerciseDataset)
+                : Object.keys(data).map(getWellnessDataset)
+        },
+        options: {
+            scales: {
+                x: { type: 'time', time: { unit: 'day', displayFormats: { day: 'MMM D' } } },
+                y: isExerciseData
+                    ? {}
+                    : { ticks: { stepSize: 1, callback: (value, index, values) => metricOrder[datasets[index].label][value] } }
+            }
+        }
+    });
+}
+
+
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const container = document.querySelector('.container');
+
+            body.classList.toggle('dark-mode');
+            container.classList.toggle('dark-mode');
+        }
+
+        function updateMetricOptions() {
+            const category = document.getElementById('category').value;
+            const metricSelect = document.getElementById('metric');
+
+            metricSelect.innerHTML = '';
+
+            if (category === 'exercise') {
+                const exerciseMetrics = [
+                    'abdominals', 'biceps', 'calves', 'chest', 'forearm', 'glutes', 'grip',
+                    'hamstrings', 'hips', 'lats', 'lower_back', 'middle_back', 'neck',
+                    'quadriceps', 'shoulders', 'triceps'
+                ];
+
+                exerciseMetrics.forEach(metric => {
+                    const option = document.createElement('option');
+                    option.value = metric;
+                    option.textContent = metric;
+                    metricSelect.appendChild(option);
+                });
+            } else if (category === 'wellness') {
+                const wellnessMetrics = ['stress', 'motivation', 'hydration', 'sleep', 'soreness','mood'];
+
+                wellnessMetrics.forEach(metric => {
+                    const option = document.createElement('option');
+                    option.value = metric;
+                    option.textContent = metric;
+                    metricSelect.appendChild(option);
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="title-and-image">
+        <div id="title">Atlas Shrugged</div>
+        <img id="logo" src="Atlas.png" alt="Logo" />
+    </div>
+
+    <div class="header">
+        <h1>Plot Metrics</h1>
+    </div>
+
+    <div class="container">
+        <h2>Generate Plot</h2>
+        <label for="category">Category:</label>
+        <select id="category" onchange="updateMetricOptions()">
+            <option value="exercise">Exercise</option>
+            <option value="wellness">Wellness</option>
+        </select>
+
+        <label for="metric">Metric:</label>
+        <select id="metric"></select>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" required />
+
+        <label for="numOfDays">Number of Days:</label>
+        <input type="number" id="numOfDays" required />
+
+        <button onclick="generatePlot()">Generate Plot</button>
+
+        <canvas id="myChart" width="400" height="200"></canvas>
+
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+        <div id="error-message"></div>
+    </div>
+</body>
+
+</html>

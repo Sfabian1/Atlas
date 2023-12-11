@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas Shrugged - Plot Metrics</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #222;
+            color: #fff;
+        }
+
+        header {
+            background-color: #dadada;
+            color: rgb(3, 78, 2);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 18px;
+            color: rgb(0, 0, 0);
+        }
+
+        nav {
+            padding: 10px;
+            display: flex;
+        }
+
+        nav span {
+            color: #000000;
+            margin-left: 15px;
+        }
+
+        h2 {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 36px;
+            color: rgb(255, 255, 255);
+        }
+
+        .square-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .square {
+            width: calc(33.33% - 20px);
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            background-color: #e9e9e9;
+            border: 2px solid rgb(130, 130, 130);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .square h3 {
+            font-size: 16px;
+            color: rgb(0, 0, 0);
+        }
+
+        .small-rectangle-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .small-rectangle {
+            width: 100%;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .small-rectangle label {
+            color: rgb(190, 190, 190);
+        }
+
+        .small-rectangle input,
+        .small-rectangle select {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .small-rectangle button {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #00780c;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 8px;
+        }
+
+        .large-box {
+            width: 100%;
+            margin-top: 20px;
+            box-sizing: border-box;
+            background-color: #e9e9e9;
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .large-box h2 {
+            margin: 0;
+            color: rgb(0, 0, 0);
+        }
+
+        @media (max-width: 768px) {
+            .square {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Atlas Shrugged</h1>
+        <nav>
+            <span>Workouts</span>
+            <span>Profile</span>
+            <span>Wellness</span>
+            <span>Plot</span>
+            <span>Profile</span>
+        </nav>
+    </header>
+
+    <h2>Plot Metrics</h2>
+
+    <div class="square-container">
+        <div class="square">
+            <h3>Select Category:</h3>
+            <div class="small-rectangle-container">
+                <div class="small-rectangle">
+                    <select id="categorySelect" onchange="handleCategorySelect()">
+                        <option value="Exercise">Exercise</option>
+                        <option value="Set Stress">Set Stress</option>
+                        <option value="Wellness">Wellness</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="square">
+            <h3>Input Category Metric:</h3>
+            <div class="small-rectangle-container">
+                <label for="selectedCategory">Selected Category:</label>
+                <input type="text" id="selectedCategory" readonly>
+                <label for="metricInput">Metric:</label>
+                <select id="metricInput">
+                    <!-- Metrics for the selected category will be populated here -->
+                </select>
+                <button onclick="handleButtonClick()">Submit</button>
+            </div>
+        </div>
+        <div class="square">
+            <h3>Input Date Range:</h3>
+            <div class="small-rectangle-container">
+                <div class="small-rectangle">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate">
+                </div>
+                <div class="small-rectangle">
+                    <label for="numOfDays">Number of Days:</label>
+                    <input type="number" id="numOfDays" min="0">
+                </div>
+                <div class="small-rectangle">
+                    <button onclick="submitDateRange()">Submit Date Range</button>
+                </div>
+            </div>
+        </div>
+
+    <div class="large-box" id="plotBox">
+        <h2>Plot</h2>
+        <!-- This is where the plot will be displayed -->
+    </div>
+
+    <script>
+        async function getPlot() {
+            const userID = document.getElementById('userID').value;
+            const metric = document.getElementById('metric').value;
+            const startDate = document.getElementById('startDate').value;
+            const numOfDays = document.getElementById('numOfDays').value;
+    
+            const url = `http://localhost:8000/${userID}/plot?metric=${metric}&startDate=${startDate}&numOfDays=${numOfDays}`;
+    
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+    
+                // Check if content-type is defined, otherwise default to 'application/json'
+                const contentType = response.headers.get('content-type') || 'application/json';
+    
+                if (contentType.includes('application/json')) {
+                    const data = await response.json();
+                    document.getElementById('plotResult').innerHTML = JSON.stringify(data, null, 2);
+                    // Assuming the data returned is in the expected format for Chart.js
+                    createChart(data);
+                } else {
+                    const data = await response.text();
+                    document.getElementById('plotResult').innerHTML = `Non-JSON Response: ${data}`;
+                }
+            } catch (error) {
+                console.error('Error fetching plot data:', error);
+                document.getElementById('plotResult').innerHTML = `Error fetching plot data: ${error.message}`;
+            }
+        }
+    
+        function createChart(data) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Dataset Label',
+                        data: data.map(entry => ({ x: entry.date, y: entry.value })),
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { x: { type: 'time', time: { unit: 'day' } }, y: {} },
+                    elements: { line: { tension: 0 } },
+                    layout: { padding: { top: 10, right: 10, bottom: 10, left: 10 } },
+                    plugins: { legend: { display: true, position: 'top' }, title: { display: true, text: 'My Chart Title' } },
+                    borderColor: 'rgba(0, 0, 0, 1)',
+                },
+            });
+        }
+    </script>
+    
+</body>
+</html>
