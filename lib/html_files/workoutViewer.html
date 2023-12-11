@@ -20,6 +20,19 @@
     margin-bottom: 20px;
   }
 
+  .top-right-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
   #workoutListContainer {
     width: 300px;
     max-height: 400px; 
@@ -64,6 +77,7 @@
 </head>
 <body>
   <button onclick="returntoHomePage()">Return to Home Page</button>
+  <a class="top-right-button" href="ListSetUI.html">Create a Set</a>
 <h2 id="workoutListHeader">List of Workouts</h2>
 
 <div id="workoutListContainer">
