@@ -140,11 +140,11 @@
 
                 // Display default profile information
                         // Display profile information
-                document.getElementById('username').textContent = profile.username || 'N/A';
-                document.getElementById('age').textContent = profile.age || 'N/A';
-                document.getElementById('height').textContent = profile.height || 'N/A';
-                document.getElementById('weight').textContent = profile.weight || 'N/A';
-                document.getElementById('bmi').textContent = profile.bmi || 'N/A';
+                document.getElementById('username').textContent = profile[0].username || 'N/A';
+                document.getElementById('age').textContent = profile[0].age || 'N/A';
+                document.getElementById('height').textContent = profile[0].height || 'N/A';
+                document.getElementById('weight').textContent = profile[0].weight || 'N/A';
+                document.getElementById('bmi').textContent = profile[0].bmi || 'N/A';
 
                 // Pre-fill form values
                 document.getElementById('newName').value = profile.username || '';

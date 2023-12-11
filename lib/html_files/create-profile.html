@@ -144,7 +144,8 @@
             var height = document.getElementById('height').value;
             var weight = document.getElementById('weight').value;
             var bmi = calculateBMI(height, weight);
-            var currentDateTime = new Date().toISOString();
+            var DateTime = new Date().toISOString();
+            currentDateTime = DateTime.split('T')[0];
 
             var profileData = {
                 "username": username,
@@ -202,6 +203,6 @@
         document.getElementById('bmi').textContent = calculateBMI(document.getElementById('height').value, document.getElementById('weight').value);
     </script>
         
-    </script>
+    
 </body>
 </html>
