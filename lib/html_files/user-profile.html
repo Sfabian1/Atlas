@@ -16,10 +16,22 @@
             background-color: rgba(255, 255, 255, 0.8); 
             padding: 10px;
             text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         header h1 {
             margin: 0;
             font-size: 24px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #007bff;
         }
         .profile-container {
             max-width: 400px;
@@ -38,7 +50,7 @@
         .profile-stat {
             margin: 15px ;
         }
-        #createModifyProfileBtn {
+        #createProfileBtn {
             display: block;
             width: 100%;
             padding: 10px;
@@ -55,6 +67,11 @@
 <body>
     <header>
         <h1>Atlas Shrugged</h1>
+        <nav>
+            <a href="createWorkout.html">Workouts</a>
+            <a href="exercises.html">Exercises</a>
+            <a href="wellnessHomeScreen.html">Wellness</a>
+        </nav>
     </header>
     <div class="profile-container">
         <h2>User Profile</h2>
@@ -63,7 +80,7 @@
         <div class="profile-stat">Height: <span id="height"></span> </div>
         <div class="profile-stat">Weight: <span id="weight"></span> </div>
         <div class="profile-stat">BMI: <span id="bmi"></span></div>
-        <button id="createModifyProfileBtn">Create Profile</button>
+        <button id="createProfileBtn">Create Profile</button>
     </div>
 
     <script>
@@ -92,7 +109,7 @@
             });
         }
 
-        document.getElementById('createModifyProfileBtn').addEventListener('click', function() {
+        document.getElementById('createProfileBtn').addEventListener('click', function() {
             window.location.href = 'create-profile.html'; 
         });
     });

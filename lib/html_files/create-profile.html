@@ -33,6 +33,7 @@
               justify-content: space-between;
               align-items: center;
               box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+              flex-wrap: wrap;
         }
 
         header h1 {
@@ -96,6 +97,11 @@
 <body>
     <header>
         <h1>Atlas Shrugged</h1>
+        <nav>
+            <a href="createWorkout.html">Workouts</a>
+            <a href="exercises.html">Exercises</a>
+            <a href="wellnessHomeScreen.html">Wellness</a>
+        </nav>
     </header>
     <div id="create-profile-container">
         <h2>Create Your Profile</h2>
@@ -119,61 +125,57 @@
     </div>
     <script>
         
-        function calculateBMI() {
-            const height = parseFloat(document.getElementById('height').value);
-            const weight = parseFloat(document.getElementById('weight').value);
-            const bmiSpan = document.getElementById('bmi');
-
+        function calculateBMI(height, weight) {
+            height = parseFloat(height);
+            weight = parseFloat(weight);
             if (!isNaN(height) && !isNaN(weight) && height > 0 && weight > 0) {
-                const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
-                bmiSpan.textContent = bmi;
+                return (weight / ((height / 100) ** 2)).toFixed(2);
             } else {
-                bmiSpan.textContent = 'N/A';
+                return 'N/A';
             }
-            }
-        document.getElementById('height').addEventListener('input', calculateBMI);
-        document.getElementById('weight').addEventListener('input', calculateBMI);
-
-        calculateBMI();
-
+        }
         const USER_ID_KEY = "userId";
         const PROFILE_ID_KEY = "profileId";
-    
+
         function submitProfile(event) {
-            event.preventDefault(); 
+            event.preventDefault();
             var username = document.getElementById('username').value;
             var age = document.getElementById('age').value;
             var height = document.getElementById('height').value;
             var weight = document.getElementById('weight').value;
+            var bmi = calculateBMI(height, weight);
+            var currentDateTime = new Date().toISOString();
 
-         var profileData = {
-           "username": username,
-           "age": age,
-           "height": height,
-           "weight": weight
-         };
-
+            var profileData = {
+                "username": username,
+                "age": age,
+                "height": height,
+                "weight": weight,
+                "bmi": bmi,
+                "created_at": currentDateTime
+            };
       
-        fetch('http://localhost:8000/' + getIdFromCache(USER_ID_KEY) + '/profile', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(profileData)
-        })
-        .then(response => {
-            if (!response.ok) {
+            fetch('http://localhost:8000/' + getIdFromCache(USER_ID_KEY) + '/profile', {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(profileData)
+            })
+            .then(response => {
+              if (!response.ok) {
                 throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            setIdInCache(PROFILE_ID_KEY, data);
-            console.log(getIdFromCache(PROFILE_ID_KEY));
-        })
-        .catch(error => {
+              }
+              return response.json();
+            })
+            .then(data => {
+              setIdInCache(PROFILE_ID_KEY, data);
+              console.log(getIdFromCache(PROFILE_ID_KEY));
+              window.location.href = 'user-profile.html';
+            })
+            .catch(error => {
             console.error('Error creating profile:', error);
-        });
+            });
         }
 
         function setIdInCache(idKey, number) {
@@ -189,10 +191,16 @@
         }
 
 
-        document.getElementById('create-profile-form').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            submitProfile(event);
+        document.getElementById('create-profile-form').addEventListener('submit', submitProfile);
+        document.getElementById('height').addEventListener('input', function() {
+            document.getElementById('bmi').textContent = calculateBMI(this.value, document.getElementById('weight').value);
         });
+        document.getElementById('weight').addEventListener('input', function() {
+            document.getElementById('bmi').textContent = calculateBMI(document.getElementById('height').value, this.value);
+        });
+
+        document.getElementById('bmi').textContent = calculateBMI(document.getElementById('height').value, document.getElementById('weight').value);
+    </script>
         
     </script>
 </body>
